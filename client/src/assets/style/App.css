@@ -1,42 +1,36 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: "espoir";
+  src: url("../fonts/espoir.eot");
+  src: url("../fonts/espoir.eot") format("embedded-opentype"),
+    url("../fonts/espoir.woff2") format("woff2"),
+    url("../fonts/espoir.woff") format("woff"),
+    url("../fonts/espoir.ttf") format("truetype"),
+    url("../fonts/espoir.svg#espoir") format("svg");
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+@font-face {
+  font-family: "espoirItalic";
+  src: url("../fonts/espoirItalic.eot");
+  src: url("../fonts/espoirItalic.eot") format("embedded-opentype"),
+    url("../fonts/espoirItalic.woff2") format("woff2"),
+    url("../fonts/espoirItalic.woff") format("woff"),
+    url("../fonts/espoirItalic.ttf") format("truetype"),
+    url("../fonts/espoirItalic.svg#espoirItalic") format("svg");
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "espoir", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.brand-logo {
+  height: 100%;
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.brand-logo > img {
+  height: 64px;
 }
