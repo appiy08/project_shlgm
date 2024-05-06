@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+// Begin Mixins
+@mixin playfairDisplayFont($fontWeight: 400, $fontStyle: normal) {
+    font-family: $primary-font-family;
+    font-optical-sizing: auto;
+    font-weight: $fontWeight;
+    font-style: normal;
+}
+@mixin ralewayFont($fontWeight: 400, $fontStyle: normal) {
+    font-family: $secondary-font-family;
+    font-optical-sizing: auto;
+    font-weight: $fontWeight;
+    font-style: normal;
+}
+// End Mixins
+
+// Begin Playfair Display Font
+.playfair-display-regular {
+    @include playfairDisplayFont($fontWeight: 400, $fontStyle: normal);
+}
+.playfair-display-regular-italic {
+    @include playfairDisplayFont($fontWeight: 400, $fontStyle: italic);
+}
+.playfair-display-medium {
+    @include playfairDisplayFont($fontWeight: 500, $fontStyle: normal);
+}
+.playfair-display-medium-italic {
+    @include playfairDisplayFont($fontWeight: 500, $fontStyle: italic);
+}
+.playfair-display-semibold {
+    @include playfairDisplayFont($fontWeight: 600, $fontStyle: normal);
+}
+.playfair-display-semibold-italic {
+    @include playfairDisplayFont($fontWeight: 600, $fontStyle: italic);
+}
+.playfair-display-bold {
+    @include playfairDisplayFont($fontWeight: 700, $fontStyle: normal);
+}
+.playfair-display-bold-italic {
+    @include playfairDisplayFont($fontWeight: 700, $fontStyle: italic);
+}
+.playfair-display-extrabold {
+    @include playfairDisplayFont($fontWeight: 800, $fontStyle: normal);
+}
+.playfair-display-extrabold-italic {
+    @include playfairDisplayFont($fontWeight: 800, $fontStyle: italic);
+}
+.playfair-display-black {
+    @include playfairDisplayFont($fontWeight: 900, $fontStyle: normal);
+}
+.playfair-display-black-italic {
+    @include playfairDisplayFont($fontWeight: 900, $fontStyle: italic);
+}
+// End Playfair Display Font
+// Begin Raleway Font
+.raleway-thin {
+    @include ralewayFont($fontWeight: 100, $fontStyle: normal);
+}
+.raleway-thin-italic {
+    @include ralewayFont($fontWeight: 100, $fontStyle: italic);
+}
+.raleway-extralight {
+    @include ralewayFont($fontWeight: 200, $fontStyle: normal);
+}
+.raleway-extralight-italic {
+    @include ralewayFont($fontWeight: 200, $fontStyle: italic);
+}
+.raleway-light {
+    @include ralewayFont($fontWeight: 300, $fontStyle: normal);
+}
+.raleway-light-italic {
+    @include ralewayFont($fontWeight: 300, $fontStyle: italic);
+}
+.raleway-regular {
+    @include ralewayFont($fontWeight: 400, $fontStyle: normal);
+}
+.raleway-regular-italic {
+    @include ralewayFont($fontWeight: 400, $fontStyle: italic);
+}
+.raleway-medium {
+    @include ralewayFont($fontWeight: 500, $fontStyle: normal);
+}
+.raleway-medium-italic {
+    @include ralewayFont($fontWeight: 500, $fontStyle: italic);
+}
+.raleway-semibold {
+    @include ralewayFont($fontWeight: 600, $fontStyle: normal);
+}
+.raleway-semibold-italic {
+    @include ralewayFont($fontWeight: 600, $fontStyle: italic);
+}
+.raleway-bold {
+    @include ralewayFont($fontWeight: 700, $fontStyle: normal);
+}
+.raleway-bold-italic {
+    @include ralewayFont($fontWeight: 700, $fontStyle: italic);
+}
+.raleway-extrabold {
+    @include ralewayFont($fontWeight: 800, $fontStyle: normal);
+}
+.raleway-extrabold-italic {
+    @include ralewayFont($fontWeight: 800, $fontStyle: italic);
+}
+.raleway-black {
+    @include ralewayFont($fontWeight: 900, $fontStyle: normal);
+}
+.raleway-black-italic {
+    @include ralewayFont($fontWeight: 900, $fontStyle: italic);
+}
+// End Raleway Font

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+// Begin Variables
+@import 'variables';
+// End Variables
+// Begin Font Classes
+@import 'font';
+// End Font Classes
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+body {
+    width: 100%;
+    font-family:
+        $secondary-font-family,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans",
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji";
+    .brand-logo {
+        height: 100%;
+        img {
+            height: 64px;
+        }
+    }
+}
