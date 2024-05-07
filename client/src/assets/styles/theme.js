@@ -11,6 +11,9 @@ export const config = {
     fontFamilyCode: '"Raleway", sans-serif',
   },
   components: {
+    Layout: {
+      headerPadding: "0 30px",
+    },
     Button: {
       dangerShadow: "none",
       defaultShadow: "none",

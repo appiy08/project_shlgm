@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 // End Imports
 const { Header } = Layout;
 
-const PublicHeader = () => {
+const AppHeader = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [currentSelectMenu, setCurrentSelectMenu] = useState("1");
@@ -30,7 +30,6 @@ const PublicHeader = () => {
 
   return (
     <Header
-      headerPadding="0 16px"
       style={{
         position: "sticky",
         top: 0,
@@ -43,14 +42,16 @@ const PublicHeader = () => {
           <img src="./cc-shlgm-logo.png" alt="Brand Logo" />
         </div>
         <Flex align="center" gap="middle">
-          <Menu
-            theme="dark"
-            onClick={onClickMenu}
-            selectedKeys={[currentSelectMenu]}
-            mode="horizontal"
-            items={MenuItems}
-            style={{ minWidth: 320 }}
-          />
+          <div className="menu-container">
+            <Menu
+              theme="dark"
+              onClick={onClickMenu}
+              selectedKeys={[currentSelectMenu]}
+              mode="horizontal"
+              items={MenuItems}
+              style={{ minWidth: 320 }}
+            />
+          </div>
           <Flex gap="middle">
             <Button type="primary" onClick={() => navigate("/login")}>
               Log In
@@ -65,15 +66,15 @@ const PublicHeader = () => {
   );
 };
 
-PublicHeader.propTypes = {};
+AppHeader.propTypes = {};
 
-export default PublicHeader;
+export default AppHeader;
 
 const MenuItems = [
   {
     key: "1",
     label: "Home",
-    path: "/home",
+    path: "/",
   },
   {
     key: "2",
@@ -87,7 +88,7 @@ const MenuItems = [
   },
   {
     key: "4",
-    label: "Contact Us",
-    path: "/contact-us",
+    label: "Contact",
+    path: "/contact",
   },
 ];

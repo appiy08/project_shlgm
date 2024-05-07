@@ -1,40 +1,21 @@
-import { Layout, theme } from "antd";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import PublicHeader from "./PublicHeader";
-// End Imports 
-const { Content, Footer } = Layout;
+import AppBottomNavigation from "./AppBottomNavigation";
+import AppFooter from "./AppFooter";
+import AppHeader from "./AppHeader";
+// End Imports
+const { Content } = Layout;
 
 const PublicLayout = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
+  
   return (
-    <Layout>
-     <PublicHeader/>
-      <Content
-        style={{
-          padding: "64px 48px",
-        }}
-      >
-        <div
-          style={{
-            padding: 24,
-            minHeight: 380,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <Outlet />
-        </div>
+    <Layout className="app-layout">
+      <AppHeader />
+      <Content>
+        <Outlet />
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
+      <AppBottomNavigation />
+      <AppFooter />
     </Layout>
   );
 };

@@ -227,5 +227,36 @@ body .brand-logo {
 body .brand-logo img {
   height: 64px;
 }
+body .app-layout .menu-container,
+body .app-layout .app-footer {
+  display: none;
+}
+body .app-layout .app-bottom-navigation {
+  display: block;
+  padding: 0;
+}
+body .app-layout .app-bottom-navigation .ant-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+}
+body .app-layout .app-bottom-navigation .ant-menu-item .ant-menu-item-icon {
+  font-size: 20px;
+}
+body .app-layout .app-bottom-navigation .ant-menu-item .ant-menu-title-content {
+  margin: 0;
+  line-height: 28px;
+}
+@media (min-width: 768px) {
+  body .app-layout .menu-container,
+  body .app-layout .app-footer {
+    display: block;
+  }
+  body .app-layout .app-bottom-navigation {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=App.css.map */

@@ -1,16 +1,16 @@
 @charset "UTF-8";
 // Begin Variables
-@import 'variables';
+@import "variables";
 // End Variables
 // Begin Font Classes
-@import 'font';
+@import "font";
 // End Font Classes
 *,
 *::after,
 *::before {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 body {
     width: 100%;
@@ -32,6 +32,41 @@ body {
         height: 100%;
         img {
             height: 64px;
+        }
+    }
+    .app-layout {
+        .menu-container,
+        .app-footer {
+            display: none;
+        }
+        .app-bottom-navigation{
+            display: block;
+            padding: 0;
+            .ant-menu-item{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 8px 16px;
+                .ant-menu-item-icon{
+                    font-size: 20px;
+                }
+                .ant-menu-title-content{
+                    margin: 0;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+    @media (min-width: 768px) {
+        .app-layout {
+            .menu-container,
+            .app-footer {
+                display: block;
+            }
+            .app-bottom-navigation{
+                display: none;
+            }
         }
     }
 }
