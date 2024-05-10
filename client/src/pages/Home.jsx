@@ -1,7 +1,11 @@
+import HomeSlideshow from "../Components/Public/Pages/HomeSlideshow";
+// End Imports
+
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
-
-export default Home
+    <>
+      <HomeSlideshow />
+    </>
+  );
+};
+export default Home;

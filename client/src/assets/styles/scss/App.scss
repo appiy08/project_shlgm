@@ -1,10 +1,9 @@
 @charset "UTF-8";
-// Begin Variables
+// Begin Imports
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 @import "variables";
-// End Variables
-// Begin Font Classes
 @import "font";
-// End Font Classes
+// End Imports
 *,
 *::after,
 *::before {
@@ -39,22 +38,96 @@ body {
         .app-footer {
             display: none;
         }
-        .app-bottom-navigation{
+        .app-bottom-navigation {
             display: block;
             padding: 0;
-            .ant-menu-item{
+            .ant-menu-item {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 padding: 8px 16px;
-                .ant-menu-item-icon{
+                .ant-menu-item-icon {
                     font-size: 20px;
                 }
-                .ant-menu-title-content{
+                .ant-menu-title-content {
                     margin: 0;
                     line-height: 28px;
                 }
+            }
+        }
+    }
+    .section-home-banner {
+        min-height: 600px;
+        .hb-slideshow {
+            .hb-slideshow-slide {
+                position: relative;
+                .hb-slideshow-bg {
+                    max-width: 100%;
+                    min-height: 600px;
+                    display: block;
+                    object-fit: cover;
+                }
+                .hb-slideshow-caption {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    .hb-slideshow-caption-heading{
+                        font-family: $primary-font-family;
+                        font-size: 70px;
+                        color: var(--ant-color-primary-text);
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+        .ant-carousel {
+            .slick-dots {
+                li button {
+                    background-color: #000000;
+                }
+                li.slick-active button {
+                    border: 1px solid #000000;
+                }
+            }
+            .slick-next,
+            .slick-prev {
+                width: 45px;
+                height: 45px;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+                border-radius: 50%;
+                &::before {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 15px;
+                    font-weight: 700;
+                    color: #000000;
+                    line-height: 2.5;
+                    border: 1px solid #000000;
+                    border-radius: 50%;
+                }
+                &:hover {
+                    color: var(--ant-color-text-light-solid);
+                    background-color: var(--ant-color-primary-active);
+                    &::before {
+                        color: var(--ant-color-text-light-solid);
+                        border-color: var(--ant-color-primary-active);
+                    }
+                }
+            }
+            .slick-next {
+                right: 30px;
+            }
+            .slick-prev {
+                left: 30px;
             }
         }
     }
@@ -64,7 +137,7 @@ body {
             .app-footer {
                 display: block;
             }
-            .app-bottom-navigation{
+            .app-bottom-navigation {
                 display: none;
             }
         }
