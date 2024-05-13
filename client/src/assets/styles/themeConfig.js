@@ -1,12 +1,12 @@
-export const config = {
+export const themeConfig = (props) => ({
   token: {
-    colorPrimary: "#e1a95f",
+    colorPrimary: "#e09540",
+    colorSecondary: "#353839",
     colorSuccess: "#67d85d",
     colorWarning: "#ffc638",
     colorError: "#fe6f5e",
     colorInfo: "#2fb1fc",
-    colorBgBase: "#f2f3f4",
-    colorTextBase: "#353839",
+    borderRadius: 0,
     fontFamily: '"Raleway", sans-serif',
     fontFamilyCode: '"Raleway", sans-serif',
   },
@@ -18,9 +18,9 @@ export const config = {
       dangerShadow: "none",
       defaultShadow: "none",
       primaryShadow: "none",
-      borderRadius: 0,
       algorithm: true,
+      className: props.buttonClass,
     },
   },
   cssVar: true,
-};
+});

@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 @import "variables";
 @import "font";
+@import "components";
 // End Imports
 *,
 *::after,
@@ -11,6 +12,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     width: 100%;
     font-family:
@@ -57,16 +59,32 @@ body {
             }
         }
     }
+    .fade-in {
+        opacity: 0;
+        transform: scale(1.1);
+        transition:
+            transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
+            opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-delay: 0.5s;
+    }
+    .fade-in.lazyloaded {
+        opacity: 1;
+        transform: scale(1);
+    }
     .section-home-banner {
         min-height: 600px;
         .hb-slideshow {
             .hb-slideshow-slide {
                 position: relative;
+                max-height: 600px;
+                overflow-y: hidden;
                 .hb-slideshow-bg {
                     max-width: 100%;
                     min-height: 600px;
                     display: block;
                     object-fit: cover;
+                    background: rgba(0, 0, 0, 0.199);
+                    position: relative;
                 }
                 .hb-slideshow-caption {
                     position: absolute;
@@ -78,24 +96,22 @@ body {
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    .hb-slideshow-caption-heading{
+                    color: #fff;
+                    background-color: rgb(0, 0, 0, 20%);
+                    .hb-slideshow-caption-heading {
+                        color: var(--ant-color-text-light-solid);
                         font-family: $primary-font-family;
                         font-size: 70px;
-                        color: var(--ant-color-primary-text);
                         margin-top: 0;
+                        text-transform: uppercase;
+                    }
+                    .hb-slideshow-caption-subheading {
+                        color: var(--ant-color-text-light-solid);
                     }
                 }
             }
         }
         .ant-carousel {
-            .slick-dots {
-                li button {
-                    background-color: #000000;
-                }
-                li.slick-active button {
-                    border: 1px solid #000000;
-                }
-            }
             .slick-next,
             .slick-prev {
                 width: 45px;
@@ -103,15 +119,16 @@ body {
                 transform: translate(-50%, -50%);
                 z-index: 1;
                 border-radius: 50%;
+                background-color: rgba(0,0,0,0);
                 &::before {
                     display: block;
                     width: 100%;
                     height: 100%;
                     font-size: 15px;
-                    font-weight: 700;
-                    color: #000000;
+                    font-weight: bolder;
+                    color: #ffffff;
                     line-height: 2.5;
-                    border: 1px solid #000000;
+                    border: 1px solid #ffffff;
                     border-radius: 50%;
                 }
                 &:hover {

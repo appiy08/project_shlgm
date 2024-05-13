@@ -1,15 +1,14 @@
-import { ConfigProvider } from "antd";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { config } from "./assets/styles/theme.js";
-import { router } from "./Router.jsx";
 import "./assets/styles/App.css";
+import ThemeProvider from "./assets/styles/ThemeProvider.jsx";
+import { router } from "./Router.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ConfigProvider theme={config}>
+    <ThemeProvider>
       <RouterProvider router={router} />
-    </ConfigProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

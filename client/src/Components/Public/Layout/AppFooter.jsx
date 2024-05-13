@@ -9,7 +9,7 @@ const AppFooter = () => {
         textAlign: "center",
       }}
     >
-      Ant Design ©{new Date().getFullYear()} Created by Ant UED
+      Celestial Chic ©{new Date().getFullYear()} Created by Appiy08
     </Footer>
   );
 };
