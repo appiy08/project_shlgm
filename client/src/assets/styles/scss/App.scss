@@ -71,6 +71,10 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+    .ant-typography-primary{
+        color: var(--ant-color-primary);
+        font-weight: 500;
+    }
     .section-home-banner {
         min-height: 600px;
         .hb-slideshow {
@@ -119,7 +123,7 @@ body {
                 transform: translate(-50%, -50%);
                 z-index: 1;
                 border-radius: 50%;
-                background-color: rgba(0,0,0,0);
+                background-color: rgba(0, 0, 0, 0);
                 &::before {
                     display: block;
                     width: 100%;
@@ -145,6 +149,31 @@ body {
             }
             .slick-prev {
                 left: 30px;
+            }
+        }
+    }
+    .section-home-collection {
+        margin: 5rem 0;
+        .slick-list {
+            .slick-slide {
+                padding: 0 15px;
+            }
+        }
+        .ant-card.collection-card {
+            .ant-card-body {
+                padding: 0;
+                .collection-card-content {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    transform: translateY(-40%);
+                    width: 100%;
+                    height: auto;
+                    padding: 15px 0;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
         }
     }
