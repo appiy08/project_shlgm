@@ -1,10 +1,6 @@
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Carousel, Typography } from "antd";
+import { Button, Card, Carousel, Popover, Typography } from "antd";
 import { map } from "lodash";
+import AddToCartBtnBox from "../../../Common/AddToCartBtn";
 import RichText from "../../../Common/RichText";
 // End Imports
 const { Title } = Typography;
@@ -19,17 +15,74 @@ const HomeNewArrivals = () => {
           slidesToShow={4}
           slidesToScroll={4}
           infinite={false}
-          className="home-collection-slides"
+          responsive={[
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+              },
+            },
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ]}
+          className="home-new-arrivals-slides"
         >
           {map(NewArrivalsData, (item, index) => {
             return (
               <div key={index}>
                 <Card
-                  className="collection-card"
-                  cover={<img alt="collection-img-1" src={item.images[0]} />}
+                  className="product-arrival-card"
+                  cover={
+                    <>
+                      {map(item?.images, (img, imgIdx) => {
+                        if (imgIdx < 2) {
+                          return (
+                            <img
+                              key={imgIdx}
+                              alt={`product-img-${imgIdx}`}
+                              src={img}
+                              width={323}
+                              height={489}
+                              className={`product-cover-img-${imgIdx + 1} fade-in`}
+                            />
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+                      <div className="product-hover-content fade-in">
+                        <Popover
+                          content={AddToCartBtnBox}
+                          trigger="click"
+                          arrow={false}
+                        >
+                          <Button
+                            key="select_option"
+                            type="primary"
+                            size="large"
+                            block
+                          >
+                            Select option
+                          </Button>
+                        </Popover>
+                      </div>
+                    </>
+                  }
                 >
                   <Title level={5}>{item.title}</Title>
-                  
                   <RichText
                     delete
                     price={item.discountedPrice}
@@ -42,7 +95,6 @@ const HomeNewArrivals = () => {
                     currency={"INR"}
                     style={{ paddingLeft: 8 }}
                   />
-                   <Button key="select_option" block style={{marginTop:12}}>Select option</Button>
                 </Card>
               </div>
             );
