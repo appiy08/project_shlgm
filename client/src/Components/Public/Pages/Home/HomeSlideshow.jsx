@@ -9,7 +9,7 @@ const HomeSlideshow = () => {
         <Carousel
           arrows={true}
           infinite={false}
-          autoplay={false}
+          autoplay={true}
           lazyLoad={true}
           fade={true}
           effect="fade"
@@ -23,13 +23,13 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hb-slideshow-caption-subheading">
+                <Text className="hbsc-subheading">
                   TRANSPARENT. HONEST. REVOLUTIONARY.
                 </Text>
-                <Title level={2} className="hb-slideshow-caption-heading">
+                <Title level={2} className="hbsc-heading">
                   Summer Collection
                 </Title>
-                <Button type="primary" className="hb-slideshow-caption-btn">
+                <Button type="primary" className="hbsc-btn">
                   Shop Now
                 </Button>
               </div>
@@ -43,13 +43,13 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hb-slideshow-caption-subheading">
+                <Text className="hbsc-subheading">
                   TRANSPARENT. HONEST. REVOLUTIONARY.
                 </Text>
-                <Title level={2} className="hb-slideshow-caption-heading">
+                <Title level={2} className="hbsc-heading">
                   Spring Collection
                 </Title>
-                <Button type="primary" className="hb-slideshow-caption-btn">
+                <Button type="primary" className="hbsc-btn">
                   Shop Now
                 </Button>
               </div>
@@ -63,13 +63,13 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hb-slideshow-caption-subheading">
+                <Text className="hbsc-subheading">
                   30% off all order.
                 </Text>
-                <Title level={2} className="hb-slideshow-caption-heading">
+                <Title level={2} className="hbsc-heading">
                   New Arrivals
                 </Title>
-                <Button type="primary" className="hb-slideshow-caption-btn">
+                <Button type="primary" className="hbsc-btn">
                   Shop Now
                 </Button>
               </div>
@@ -83,13 +83,13 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hb-slideshow-caption-subheading">
+                <Text className="hbsc-subheading">
                   30% off all order.
                 </Text>
-                <Title level={2} className="hb-slideshow-caption-heading">
+                <Title level={2} className="hbsc-heading">
                   oh, Hello Neweness!
                 </Title>
-                <Button type="primary" className="hb-slideshow-caption-btn">
+                <Button type="primary" className="hbsc-btn">
                   Shop Now
                 </Button>
               </div>

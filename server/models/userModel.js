@@ -16,6 +16,7 @@ const userSchema = new Schema({
     enum: ["buyer", "seller", "user"],
     default: "buyer",
   },
+  agreement: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
@@ -45,12 +46,7 @@ userSchema.statics.login = async function (email, password) {
 };
 
 // Static Signup Method
-userSchema.statics.signup = async function ({
-  name,
-  email,
-  password,
-  role,
-}) {
+userSchema.statics.signup = async function ({ name, email, password, role }) {
   if (!email || !password) {
     throw new Error("All fields must be filled");
   }

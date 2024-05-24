@@ -56,7 +56,9 @@ const HomeNewArrivals = () => {
                               src={img}
                               width={323}
                               height={489}
-                              className={`product-cover-img-${imgIdx + 1} fade-in`}
+                              className={`product-cover-img-${
+                                imgIdx + 1
+                              } fade-in`}
                             />
                           );
                         } else {
@@ -109,27 +111,39 @@ export default HomeNewArrivals;
 
 const NewArrivalsData = [
   {
-    images: ["public/images/product/7.jpg", "public/images/product/7.1.jpg"],
+    images: ["images/product/1.4.jpg", "images/product/1.2.jpg"],
     title: "AL Fonso Dress (UpSell)",
     price: "5845.00",
     discountedPrice: "6263.00",
   },
   {
-    images: ["public/images/product/7.jpg", "public/images/product/7.1.jpg"],
+    images: ["images/product/2.1.jpg", "images/product/2.1.jpg"],
     title: "Bought Together",
     price: "6263.00",
     discountedPrice: "7516.00",
   },
   {
-    images: ["public/images/product/7.jpg", "public/images/product/7.1.jpg"],
+    images: ["images/product/4.1.jpg", "images/product/4.2.jpg"],
     title: "Cascata Wide - Brim Hat",
     price: "6681.00",
     discountedPrice: "6681.00",
   },
   {
-    images: ["public/images/product/7.jpg", "public/images/product/7.1.jpg"],
+    images: ["images/product/5.jpg", "images/product/5.1.jpg"],
     title: "Cleo Mini Dress",
     price: "6681.00",
     discountedPrice: "6681.00",
+  },
+  {
+    images: ["images/product/15.jpg", "images/product/15.2.jpg"],
+    title: "kaesha York Dress",
+    price: "6256.00",
+    discountedPrice: "6256.00",
+  },
+  {
+    images: ["images/product/6.jpg", "images/product/6.1.jpg"],
+    title: "Large Essential Hoop",
+    price: "5839.00",
+    discountedPrice: "6673.00",
   },
 ];

@@ -637,9 +637,42 @@ body .brand-logo {
 body .brand-logo img {
   height: 64px;
 }
-body .app-layout .menu-container,
+body .img-fluid {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+body .app-layout .menu-container {
+  display: none;
+}
+body .app-layout .brand-logo {
+  display: block;
+  text-align: start;
+}
+body .app-layout .brand-logo img {
+  width: 100%;
+  padding: 0 16px;
+}
 body .app-layout .app-footer {
   display: none;
+  background-color: var(--ant-color-white);
+}
+body .app-layout .app-footer .brand-logo img {
+  width: auto;
+  height: 128px;
+}
+body .app-layout .app-footer .ant-list-header {
+  text-align: start;
+  font-family: "Playfair Display", serif;
+}
+body .app-layout .app-footer .ant-list-items {
+  text-align: start;
+}
+body .app-layout .app-footer .ant-list-items .ant-list-item {
+  padding: 0;
+}
+body .app-layout .app-footer .ant-list-items .ant-list-item .ant-list-item-meta .ant-list-item-meta-content .ant-list-item-meta-title {
+  font-weight: 400;
 }
 body .app-layout .app-bottom-navigation {
   display: block;
@@ -737,14 +770,14 @@ body .section-home-banner .hb-slideshow .hb-slideshow-slide .hb-slideshow-captio
   color: #fff;
   background-color: rgba(0, 0, 0, 0.2);
 }
-body .section-home-banner .hb-slideshow .hb-slideshow-slide .hb-slideshow-caption .hb-slideshow-caption-heading {
+body .section-home-banner .hb-slideshow .hb-slideshow-slide .hb-slideshow-caption .hbsc-heading {
   color: var(--ant-color-text-light-solid);
   font-family: "Playfair Display", serif;
   font-size: 70px;
   margin-top: 0;
   text-transform: uppercase;
 }
-body .section-home-banner .hb-slideshow .hb-slideshow-slide .hb-slideshow-caption .hb-slideshow-caption-subheading {
+body .section-home-banner .hb-slideshow .hb-slideshow-slide .hb-slideshow-caption .hbsc-subheading {
   color: var(--ant-color-text-light-solid);
 }
 body .section-home-collection {
@@ -821,19 +854,57 @@ body .section-home-video-background .home-video-background-inner {
 body .section-home-video-background .home-video-background-inner .home-video-background-content {
   width: 100%;
   height: auto;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
   z-index: 1;
-  color: var(--ant-color-bg-base);
+}
+body .section-home-video-background .home-video-background-inner .home-video-background-content .hvbc-subheading {
+  font-size: 11px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+body .section-home-video-background .home-video-background-inner .home-video-background-content .hvbc-heading {
+  font-family: "Playfair Display", serif;
+  font-size: 60px;
+  line-height: 65px;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+}
+body .section-home-video-background .home-video-background-inner .home-video-background-content .hvbc-description {
+  font-size: 20px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0 0 0 0;
+}
+body .section-home-video-background .home-video-background-inner .home-video-background-content .hvbc-sub-btn {
+  margin-top: 37px;
 }
 body .section-home-video-background .home-video-background-inner video {
+  width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   z-index: 0;
-  width: 100%;
   object-fit: cover;
+}
+body .auth-container {
+  background-color: var(--ant-color-white);
+  margin: 16px;
+  padding: 16px;
+}
+body .auth-container .auth-container-logo {
+  width: auto;
+  height: 128px;
+}
+body .auth-container .auth-container-captions {
+  padding: 0 16px;
+}
+body .auth-container .auth-container-captions .title {
+  margin-bottom: 0;
+}
+body .auth-container .auth-container-captions .sub-title {
+  padding: 0 4px;
 }
 @media (min-width: 768px) {
   body .app-layout .menu-container,

@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Divider, Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import AppBottomNavigation from "./AppBottomNavigation";
 import AppFooter from "./AppFooter";
@@ -7,16 +7,19 @@ import AppHeader from "./AppHeader";
 const { Content } = Layout;
 
 const PublicLayout = () => {
-  
+
   return (
-    <Layout className="app-layout">
-      <AppHeader />
-      <Content>
-        <Outlet />
-      </Content>
-      <AppBottomNavigation />
-      <AppFooter />
-    </Layout>
+    <>
+      <Layout className="app-layout">
+        <AppHeader />
+        <Content>
+          <Outlet />
+        </Content>
+        <Divider />
+        <AppBottomNavigation />
+        <AppFooter />
+      </Layout>
+    </>
   );
 };
 export default PublicLayout;

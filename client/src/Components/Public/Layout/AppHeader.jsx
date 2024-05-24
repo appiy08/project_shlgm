@@ -30,16 +30,17 @@ const AppHeader = () => {
 
   return (
     <Header
+    theme="light"
       style={{
         position: "sticky",
         top: 0,
-        zIndex: 1,
+        zIndex: 999,
         width: "100%",
       }}
     >
       <Flex align="center" justify="space-between" style={{ height: "100%" }}>
         <div className="brand-logo">
-          <img src="./cc-shlgm-logo.png" alt="Brand Logo" />
+          <img src="./cc_brand_name_primary.svg" alt="Brand Logo" />
         </div>
         <Flex align="center" gap="middle">
           <div className="menu-container">

@@ -43,7 +43,7 @@ const HomeCollectionSlides = () => {
               cover={
                 <img
                   alt="collection-img-1"
-                  src="public/images/shop/collection-img-1.jpg"
+                  src="images/shop/collection-img-1.jpg"
                 />
               }
             >
@@ -59,7 +59,7 @@ const HomeCollectionSlides = () => {
               cover={
                 <img
                   alt="collection-img-2"
-                  src="public/images/shop/collection-img-2.jpg"
+                  src="images/shop/collection-img-2.jpg"
                 />
               }
             >
@@ -75,7 +75,7 @@ const HomeCollectionSlides = () => {
               cover={
                 <img
                   alt="collection-img-3"
-                  src="public/images/shop/collection-img-3.jpg"
+                  src="images/shop/collection-img-3.jpg"
                 />
               }
             >
@@ -91,7 +91,7 @@ const HomeCollectionSlides = () => {
               cover={
                 <img
                   alt="collection-img-4"
-                  src="public/images/shop/collection-img-4.jpg"
+                  src="images/shop/collection-img-4.jpg"
                 />
               }
             >
