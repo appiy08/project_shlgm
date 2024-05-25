@@ -1,8 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+// End Component Imports 
 import PublicLayout from "./Components/Public/Layout";
 import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
+import CustomerLogIn from "./pages/auth/CustomerLogIn";
+import CustomerSignUp from "./pages/auth/CustomerSignUp";
+// End Page Imports 
 
 export const router = createBrowserRouter([
   {
@@ -11,15 +13,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to="/home" />,
+      },
+      {
+        path: "home",
         element: <Home />,
       },
       {
         path: "login",
-        element: <Login />,
+        element: <CustomerLogIn />,
       },
       {
         path: "signup",
-        element: <Signup />,
+        element: <CustomerSignUp />,
       },
     ],
   },

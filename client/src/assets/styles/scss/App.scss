@@ -41,15 +41,22 @@ body {
         vertical-align: middle;
     }
     .app-layout {
-        .menu-container{
-            display: none;
-        }
         .brand-logo {
             display: block;
             text-align: start;
             img {
                 width: 100%;
-                padding: 0 16px;
+                height: 4rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            .header-navigation-menu {
+                display: none;
             }
         }
         .app-footer {
@@ -319,19 +326,20 @@ body {
             width: auto;
             height: 128px;
         }
-        .auth-container-captions{
+        .auth-container-captions {
             padding: 0 16px;
-            .title{
+            text-align: center;
+            .title {
                 margin-bottom: 0;
             }
-            .sub-title{
+            .sub-title {
                 padding: 0 4px;
             }
         }
     }
     @media (min-width: 768px) {
         .app-layout {
-            .menu-container,
+            .header-navigation-menu,
             .app-footer {
                 display: block;
             }

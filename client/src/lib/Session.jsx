@@ -32,36 +32,40 @@ export async function createCookie(name, data, expireTime) {
   cookies.set(name, session, { expires, path: "/" });
 }
 
-export async function getCookie(name) {
-  try {
-    const session = await cookies.get(name);
-
-    if (!session) {
-      return null;
-    } else {
-      const result = await decrypt(session);
-      console.log("cookie :>:>:>:>", result);
-      return result?.data;
+export const getCookie = (name) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const session = cookies.get(name);
+      if (!session) {
+        resolve(null); // Resolve with null instead of returning null
+      } else {
+        const result = decrypt(session);
+        console.log("result :>:>:>", result);
+        resolve(result);
+      }
+    } catch (error) {
+      console.error("Error getting cookie:", error);
+      reject(error);
     }
-  } catch (error) {
-    console.error("Error getting cookie:", error);
-    return null;
-  }
-}
+  });
+};
 
-export async function updateSession(name, request, expireTime) {
-  try {
-    const session = request.cookies.get(name);
-    if (!session) return;
-
-    // Refresh the session so it doesn't expire
-    const parsed = await decrypt(session.toString());
-    parsed.expires = expireTime ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
-    cookies.set(name, await encrypt(parsed), {
-      expires: parsed.expires,
-      path: "/",
-    });
-  } catch (error) {
-    console.error("Error updating session:", error);
-  }
-}
+export const updateSession = (name, request, expireTime) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const session = request.cookies.get(name);
+      if (!session) return;
+      // Refresh the session so it doesn't expire
+      const parsed = decrypt(session.toString());
+      parsed.expires = expireTime ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
+      cookies.set(name, encrypt(parsed), {
+        expires: parsed.expires,
+        path: "/",
+      });
+      resolve(encrypt(parsed));
+    } catch (error) {
+      console.error("Error updating session:", error);
+      reject(error);
+    }
+  });
+};

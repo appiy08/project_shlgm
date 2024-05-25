@@ -642,16 +642,23 @@ body .img-fluid {
   height: auto;
   vertical-align: middle;
 }
-body .app-layout .menu-container {
-  display: none;
-}
 body .app-layout .brand-logo {
   display: block;
   text-align: start;
 }
 body .app-layout .brand-logo img {
   width: 100%;
-  padding: 0 16px;
+  height: 4rem;
+  padding: 0.5rem 1rem;
+}
+body .app-layout .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+}
+body .app-layout .app-header .header-navigation-menu {
+  display: none;
 }
 body .app-layout .app-footer {
   display: none;
@@ -899,6 +906,7 @@ body .auth-container .auth-container-logo {
 }
 body .auth-container .auth-container-captions {
   padding: 0 16px;
+  text-align: center;
 }
 body .auth-container .auth-container-captions .title {
   margin-bottom: 0;
@@ -907,7 +915,7 @@ body .auth-container .auth-container-captions .sub-title {
   padding: 0 4px;
 }
 @media (min-width: 768px) {
-  body .app-layout .menu-container,
+  body .app-layout .header-navigation-menu,
   body .app-layout .app-footer {
     display: block;
   }

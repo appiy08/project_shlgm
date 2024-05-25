@@ -3,7 +3,7 @@ import axios from "axios";
 // End Imports
 
 
-const serverBaseUrl = import.meta.env.APP_API_BASE_URL
+const serverBaseUrl = import.meta.env.VITE_BASE_URL
 
 const useAxiosDefault = () => {
   // const { user, dispatch } = useAuthContext();
