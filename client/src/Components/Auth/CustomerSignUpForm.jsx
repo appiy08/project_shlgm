@@ -109,6 +109,14 @@ const CustomerSignUpForm = () => {
               required: true,
               message: "Please input your password!",
             },
+            {
+              min: 8,
+              message: "The password was not less than 8 characters",
+            },
+            {
+              max: 32,
+              message: "The password was not large than 32 characters",
+            },
           ]}
           hasFeedback
         >

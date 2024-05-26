@@ -1,4 +1,4 @@
-import { Col, Row, Typography } from "antd";
+import { Col, Divider, Row, Typography } from "antd";
 import { Link } from "react-router-dom";
 import CustomerLogInForm from "../../Components/Auth/CustomerLogInForm";
 // End Imports
@@ -8,8 +8,8 @@ const CustomerLogIn = () => {
   return (
     <>
       <div className="auth-container">
-        <Row gutter={24}>
-          <Col xs={24} lg={12}>
+        <Row gutter={24} justify='center'>
+          <Col xs={24} lg={11}>
             <Row
               gutter={24}
               justify={"center"}
@@ -20,7 +20,7 @@ const CustomerLogIn = () => {
                 <Link to="/" style={{ display: "inline-block" }}>
                   <img
                     alt="Brand_Logo"
-                    src="cc_shlgm_logo_full_transparent.png"
+                    src="brand-logo/cc_shlgm_logo_primary_transparent.svg"
                     className="img-fluid auth-container-logo"
                   />
                 </Link>
@@ -37,7 +37,8 @@ const CustomerLogIn = () => {
               </Col>
             </Row>
           </Col>
-          <Col xs={24} lg={12}>
+          <Divider type="vertical" />
+          <Col xs={24} lg={11}>
             <CustomerLogInForm />
           </Col>
         </Row>

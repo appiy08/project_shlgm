@@ -690,7 +690,7 @@ body .app-layout .app-bottom-navigation .ant-menu-item {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 8px 1rem;
 }
 body .app-layout .app-bottom-navigation .ant-menu-item .ant-menu-item-icon {
   font-size: 20px;
@@ -897,15 +897,16 @@ body .section-home-video-background .home-video-background-inner video {
 }
 body .auth-container {
   background-color: var(--ant-color-white);
-  margin: 16px;
-  padding: 16px;
+  min-height: 22.5rem;
+  margin: 1rem;
+  padding: 2rem;
 }
 body .auth-container .auth-container-logo {
   width: auto;
   height: 128px;
 }
 body .auth-container .auth-container-captions {
-  padding: 0 16px;
+  padding: 0 1rem;
   text-align: center;
 }
 body .auth-container .auth-container-captions .title {

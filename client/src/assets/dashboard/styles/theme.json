@@ -1,0 +1,13 @@
+{
+  "token": {
+    "colorPrimary": "#0070ff",
+    "colorInfo": "#0070ff",
+    "colorSuccess": "#00b74a",
+    "colorWarning": "#ffa000",
+    "colorError": "#d50000",
+    "colorLink": "#4da9ff",
+    "colorTextBase": "#141414",
+    "boxShadow": "0 20px 27px #0000000d",
+    "boxShadowSecondary": "0px 4px 6px #0000001f"
+  }
+}

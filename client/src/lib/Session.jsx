@@ -1,11 +1,10 @@
 import { SignJWT, jwtVerify } from "jose";
+import { get } from "lodash";
 import { Cookies } from "react-cookie";
 // End Imports
 const secretKey = "secret";
-console.log("secret key: " + secretKey);
 
 const key = new TextEncoder().encode(secretKey);
-console.log("key: " + key);
 
 const cookies = new Cookies();
 
@@ -26,28 +25,25 @@ export async function decrypt(input) {
   return payload;
 }
 
-export async function createCookie(name, data, expireTime) {
+export const createCookie = async (name, data, expireTime) => {
   const expires = expireTime ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
   const session = await encrypt({ data, expires });
   cookies.set(name, session, { expires, path: "/" });
-}
+};
 
-export const getCookie = (name) => {
-  return new Promise((resolve, reject) => {
+export const getCookie = async (name) => {
+  const session = cookies.get(name);
+  if (!session) {
+    return null;
+  } else {
     try {
-      const session = cookies.get(name);
-      if (!session) {
-        resolve(null); // Resolve with null instead of returning null
-      } else {
-        const result = decrypt(session);
-        console.log("result :>:>:>", result);
-        resolve(result);
-      }
-    } catch (error) {
-      console.error("Error getting cookie:", error);
-      reject(error);
+      const result = await decrypt(session);
+      return get(result, "data", {});
+    } catch (err) {
+      console.error("Error decrypting session:", err);
+      throw err;
     }
-  });
+  }
 };
 
 export const updateSession = (name, request, expireTime) => {

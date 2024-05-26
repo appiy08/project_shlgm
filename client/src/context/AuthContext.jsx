@@ -31,10 +31,14 @@ const AuthContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const auth_credentials = getCookie("auth_credentials");
-    if (auth_credentials) {
-      dispatch({ type: "LOGIN", payload: auth_credentials });
-    }
+    const fetchData = async () => {
+      const result = await getCookie("auth_credentials");
+      if (result) {
+        dispatch({ type: "LOGIN", payload: result });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

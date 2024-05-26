@@ -20,7 +20,7 @@ const CustomerSignUp = () => {
                 <Link to="/" style={{ display: "inline-block" }}>
                   <img
                     alt="Brand_Logo"
-                    src="cc_shlgm_logo_full_transparent.png"
+                    src="brand-logo/cc_shlgm_logo_primary_transparent.svg"
                     className="img-fluid auth-container-logo"
                   />
                 </Link>
