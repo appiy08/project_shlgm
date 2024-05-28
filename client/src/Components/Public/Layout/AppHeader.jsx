@@ -2,7 +2,7 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Flex, Layout, Menu, Tooltip } from "antd";
 import { filter, get } from "lodash";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/auth/useAuthContext";
 import UserMenuDropdown from "./UserMenuDropdown";
 // End Imports
@@ -37,7 +37,9 @@ const AppHeader = () => {
     <Header theme="light" className="app-header">
       <Flex align="center" justify="space-between" style={{ height: "100%" }}>
         <div className="brand-logo">
-          <img src="brand-logo/cc_brand_name_primary.svg" alt="Brand Logo" />
+          <Link to="/">
+            <img src="brand-logo/cc_brand_name_primary.svg" alt="Brand Logo" />
+          </Link>
         </div>
         <Flex align="center" gap="middle">
           <div className="header-navigation-menu">
