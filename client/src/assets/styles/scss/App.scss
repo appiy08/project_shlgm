@@ -338,6 +338,40 @@ body {
             }
         }
     }
+    .product-detail-page {
+        padding: 20px;
+
+        .product-images {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .product-image-thumb {
+            margin-right: 10px;
+        }
+
+        .product-size-selection {
+            margin-bottom: 10px;
+        }
+
+        .product-quantity-selection {
+            margin-bottom: 20px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .product-buy-more-save-more {
+            margin-top: 20px;
+        }
+    }
+    .ant-collapse-header-text{
+        font-family: $primary-font-family;
+        font-size: 1.25rem;
+    }
     @media (min-width: 768px) {
         .app-layout {
             .header-navigation-menu,

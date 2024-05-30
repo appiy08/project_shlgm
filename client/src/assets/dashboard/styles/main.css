@@ -25,7 +25,6 @@ body {
   font-size: 14px;
   line-height: 1.6;
   font-weight: 400;
-  font-family: open sans, Helvetica, Arial, sans-serif;
 }
 .ant-layout.ant-layout-has-sider {
   flex-direction: row;
@@ -151,10 +150,10 @@ body {
   font-weight: 600;
 }
 .layout-dashboard .ant-layout-sider.sider-primary .ant-menu-item,
-.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu{
+.layout-dashboard .ant-layout-sider.sider-primary .ant-menu-submenu {
   padding: 10px 16px;
   color: var(--ant-color-text);
-  border-radius: 8px;
+
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -188,7 +187,7 @@ body {
   height: 32px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
-  border-radius: 6px;
+
   justify-content: center;
   align-items: center;
   margin-right: 11px;
@@ -256,7 +255,7 @@ body {
   background-color: #fff;
   color: var(--ant-color-text);
   padding: 16px;
-  border-radius: 8px;
+
   box-shadow: var(--ant-box-shadow);
   margin-bottom: 8px;
 }
@@ -272,7 +271,7 @@ body {
   width: 32px;
   height: 32px;
   box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
-  border-radius: 6px;
+
   justify-content: center;
   align-items: center;
   margin-bottom: 15px;
@@ -321,7 +320,6 @@ body {
   padding: 0 15px;
 }
 .ant-btn-sm {
-  border-radius: 4px;
 }
 
 .ant-btn-sm,
@@ -331,7 +329,6 @@ body {
   padding: 0 15px;
 }
 .ant-btn-sm {
-  border-radius: 4px;
 }
 .ant-btn,
 .ant-radio-group .ant-radio-button-wrapper {
@@ -365,7 +362,7 @@ body {
   padding: 16px;
   margin: 10px 4px;
   line-height: inherit;
-  border-radius: 12px;
+
   transition: 0.2s;
 }
 
@@ -394,7 +391,7 @@ body {
 .ant-dropdown-menu.ant-dropdown-menu-split.header-notifications-dropdown {
   background: #fff;
   box-shadow: 0 20px 27px #0000000d;
-  border-radius: 12px;
+
   min-width: 276px;
   padding: 16px 8px;
 }
@@ -528,7 +525,7 @@ h4 {
 .layout-dashboard .header-control .header-search {
   width: 213px;
   margin: 0 7px 0 0;
-  border-radius: 6px;
+
   height: 40px;
   border: 1px solid #d9d9d9;
 }
@@ -655,7 +652,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav li {
 ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   li.ant-menu-item-selected {
   box-shadow: var(--ant-box-shadow);
-  border-radius: 8px;
+
   background: #fff;
   border: 0px;
   font-weight: 600;
@@ -663,7 +660,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   li.ant-menu-item-selected {
   box-shadow: var(--ant-box-shadow);
-  border-radius: 8px;
+
   background: #fff;
   border: 0px;
   font-weight: 600;
@@ -690,7 +687,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   line-height: 32px;
   background: #fff;
   box-shadow: var(--ant-box-shadow-secondary);
-  border-radius: 6px;
+
   font-size: 16px;
 }
 
@@ -703,7 +700,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 
 ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav li:hover {
   box-shadow: var(--ant-box-shadow);
-  border-radius: 8px;
+
   background: #fff;
   border: 0px;
   font-weight: 600;
@@ -728,7 +725,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 .ant-card.ant-card-bordered.documentation-card {
   border: 0px;
   box-shadow: var(--ant-box-shadow);
-  border-radius: 8px;
+
   background: #fff;
 }
 .p-15 {
@@ -739,7 +736,7 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   height: 32px;
   text-align: center;
   box-shadow: var(--ant-box-shadow-secondary);
-  border-radius: 6px;
+
   font-size: 19px;
   background: var(--ant-color-primary);
   color: #fff;
@@ -815,7 +812,6 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 }
 
 .rightside-top span.ant-input-affix-wrapper {
-  border-radius: 4px;
 }
 
 .rightside-top span.ant-input-affix-wrapper span.ant-input-prefix {
@@ -844,7 +840,7 @@ button.ant-btn.bell strong {
   width: 20px;
   height: 20px;
   background: #f5222d;
-  border-radius: 100%;
+
   text-align: center;
   line-height: normal;
   font-weight: normal;
@@ -875,7 +871,6 @@ button.ant-btn.bell strong {
 .list-notifaction ul li a {
   display: block;
   padding: 10px;
-  border-radius: 8px;
 }
 
 .list-notifaction ul li a:hover {
@@ -886,14 +881,12 @@ button.ant-btn.bell strong {
 .list-notifaction ul span.ant-avatar.ant-avatar-image {
   width: 48px;
   height: 48px;
-  border-radius: 0.75rem;
 }
 
 .list-notifaction ul li {
   padding: 0px;
 }
 .ant-dropdown-menu.ant-dropdown-menu-split.list-notifaction {
-  border-radius: 0.75rem;
 }
 .list-notifaction .ant-list-item-meta-title {
   font-weight: bold;
@@ -920,7 +913,6 @@ button.ant-btn.bell strong {
 }
 .ant-card.criclebox {
   box-shadow: var(--ant-box-shadow);
-  border-radius: 12px;
 }
 
 .number span {
@@ -944,7 +936,7 @@ button.ant-btn.bell strong {
   text-align: center;
   background: var(--ant-color-primary);
   color: #fff;
-  border-radius: 0.5rem;
+
   margin-left: auto;
   line-height: 55px;
 }
@@ -962,8 +954,6 @@ button.ant-btn.bell strong {
     linear-gradient(62deg, #00369e 0%, #005cfd 53%, #a18dff 100%) 0% 0%
     no-repeat padding-box;
   box-shadow: var(--ant-box-shadow-secondary);
-
-  border-radius: 8px;
 }
 
 .chart-vistior {
@@ -1059,11 +1049,9 @@ span.blue {
 
 .antd-pro-pages-dashboard-analysis-style-salesExtra a:last-child {
   border-right: 1px solid #d9d9d9;
-  border-radius: 0px 5px 5px 0px;
 }
 
 .antd-pro-pages-dashboard-analysis-style-salesExtra a:first-child {
-  border-radius: 5px 0px 0px 5px;
 }
 
 .antd-pro-pages-dashboard-analysis-style-salesExtra a:hover {
@@ -1118,7 +1106,7 @@ span.blue {
 .tootip-img {
   width: 24px;
   height: 24px;
-  border-radius: 100%;
+
   border: 1px solid #fff;
   position: relative;
   z-index: 2;
@@ -1162,7 +1150,6 @@ span.blue {
   padding: 10px;
   height: auto;
   color: var(--ant-color-text);
-  border-radius: 10px;
 }
 .uploadfile {
   margin-top: 15px;
@@ -1207,7 +1194,6 @@ img {
   max-width: 100%;
 }
 .border10 {
-  border-radius: 10px;
 }
 .py-4 {
   padding: 20px;
@@ -1232,7 +1218,7 @@ img {
   background: url("../images/info-card-2.jpg") no-repeat center top;
   background-size: cover;
   padding: 15px;
-  border-radius: 15px;
+
   color: #fff;
 }
 
@@ -1402,7 +1388,6 @@ span.ismobile {
 .ant-docment button {
   width: 100%;
   margin-bottom: 10px;
-  border-radius: 5px;
 }
 
 .viewstar {
@@ -1417,7 +1402,7 @@ span.ismobile {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 16px;
-  border-radius: 0em 0.25em 0.25em 0em;
+
   border: 1px solid #ddddde;
   border-left: 0px;
   color: var(--ant-color-text);
@@ -1428,7 +1413,7 @@ span.ismobile {
   background-color: #eff3f6;
   border-color: #cfd3d6;
   background-image: linear-gradient(180deg, #fafbfc, #eff3f6 90%);
-  border-radius: 0.25em 0 0 0.25em;
+
   border-left: 1px solid #ddddde;
 }
 
@@ -1449,7 +1434,7 @@ span.ismobile {
 }
 .setting-drwer {
   background: #fff;
-  border-radius: 50%;
+
   bottom: 42px;
   right: 30px;
   font-size: 1.25rem;
@@ -1511,10 +1496,8 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav li svg path {
   font-weight: 600;
 }
 .ant-radio-button-wrapper:first-child {
-  border-radius: 4px 0 0 4px;
 }
 .ant-radio-button-wrapper:last-child {
-  border-radius: 0 4px 4px 0;
 }
 ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   li.ant-menu-item-selected
@@ -1522,7 +1505,6 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
   color: #fff;
 }
 .ant-avatar-group .ant-avatar-square {
-  border-radius: 4px;
 }
 
 .shape-avatar {
@@ -1530,7 +1512,6 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 }
 
 .shape-avatar img {
-  border-radius: 4px;
 }
 
 .avatar-info h5 {
@@ -1560,7 +1541,6 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 }
 
 .tag-primary {
-  border-radius: 6px;
   padding: 2px 12px;
   font-size: 14px;
   height: auto;
@@ -1583,7 +1563,6 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light.left-nav
 }
 
 .tag-badge {
-  border-radius: 6px;
   padding: 2px 12px;
   font-size: 14px;
   height: auto;
@@ -1725,7 +1704,6 @@ body {
   flex-grow: 1;
   padding: 24px;
   margin-right: 0;
-  border-radius: 8px;
 
   display: flex;
   flex-direction: column;
@@ -1776,7 +1754,7 @@ body {
   height: 550px;
   margin-top: -62.8px;
   padding-top: 137.8px;
-  border-radius: 12px;
+
   box-shadow: var(--ant-box-shadow);
   background-size: cover;
   background-position: 50%;
@@ -1810,7 +1788,7 @@ body {
 .header-col.header-btn button {
   height: 34px;
   padding: 0 16px;
-  border-radius: 34px;
+
   line-height: 33px;
 }
 .sign-up-header .content {
@@ -1834,14 +1812,13 @@ body {
   height: 60px;
   width: 70px;
   box-shadow: none;
-  border-radius: 6px;
 }
 .card-signup {
   width: 100%;
   max-width: 500px;
   margin: auto;
   box-shadow: var(--ant-box-shadow);
-  border-radius: 12px;
+
   margin-top: -190px;
   margin-bottom: 20px;
 }
@@ -1881,7 +1858,6 @@ body {
   color: #8c8c8c;
 }
 .ant-input {
-  border-radius: 6px;
 }
 .ant-input {
   font-weight: 600;
@@ -1907,7 +1883,6 @@ body {
 }
 .ant-btn {
   box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
-  border-radius: 6px;
 }
 .layout-sign-up .ant-layout-footer {
   padding: 24px 50px;
@@ -2191,7 +2166,7 @@ button.ant-btn.bell strong {
   width: 18px;
   height: 18px;
   background: #f5222d;
-  border-radius: 100%;
+
   text-align: center;
   line-height: normal;
   font-weight: normal;
@@ -2242,7 +2217,6 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
 }
 
 .layout-dashboard .ant-card {
-  border-radius: 12px;
   box-shadow: var(--ant-box-shadow);
 }
 
@@ -2309,7 +2283,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
   height: 64px;
   margin: auto;
   background-color: var(--ant-color-primary);
-  border-radius: 8px;
+
   box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
   display: flex;
   justify-content: center;
@@ -2566,7 +2540,7 @@ section.ant-layout.layout-content .ant-layout-content.content-ant {
 .profile-nav-bg {
   height: 300px;
   margin-top: -137.8px;
-  border-radius: 12px;
+
   box-shadow: var(--ant-box-shadow);
   background-size: cover;
   background-position: 50%;
@@ -2613,7 +2587,7 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 
 .card-profile-head .ant-card-head .ant-avatar {
   box-shadow: 0 5px 10px rgb(0 0 0 / 12%);
-  border-radius: 8px;
+
   margin: 0;
 }
 
@@ -2708,7 +2682,6 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 }
 
 .conversations-list .ant-avatar {
-  border-radius: 10.5px;
   box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
 }
 .conversations-list .ant-list-item {
@@ -2731,7 +2704,6 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 }
 
 .card-project.ant-card .ant-card-cover img {
-  border-radius: 8px;
   box-shadow: 0 4px 6px rgb(0 0 0 / 12%);
 }
 
@@ -2772,14 +2744,14 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 
 .projects-uploader {
   height: 100%;
-  border-radius: 8px;
+
   border-color: #d9d9d9;
 }
 .projects-uploader .ant-upload {
   width: 100%;
   height: 100%;
   margin: 0;
-  border-radius: 8px;
+
   padding: 8px;
 }
 
@@ -2830,7 +2802,6 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 
 .layout-dashboard-rtl .ant-radio-button-wrapper:first-child {
   border-right-width: 1px;
-  border-radius: 0 4px 4px 0;
 }
 .layout-dashboard-rtl .ant-list-box td {
   text-align: right;
@@ -2946,12 +2917,10 @@ section.ant-layout.ant-layout-has-sider.layout-dashboard.layout-profile
 }
 
 .settings-drawer.settings-drawer-rtl .viewstar a:first-child {
-  border-radius: 0em 0.25em 0.25em 0;
   border-right: 1px solid #ddddde;
 }
 
 .settings-drawer.settings-drawer-rtl .viewstar a {
-  border-radius: 0.25em 0 0 0.25em;
   border: 1px solid #ddddde;
   border-right: 0px;
 }

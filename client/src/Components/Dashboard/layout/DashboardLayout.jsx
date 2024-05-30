@@ -11,19 +11,18 @@
 */
 
 import { Affix, Drawer, Layout } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import "../../../assets/dashboard/styles/main.css";
+import "../../../assets/dashboard/styles/responsive.css";
 import Footer from "./Footer";
 import Header from "./Header";
 import Sidenav from "./Sidenav";
-import "../../../assets/dashboard/styles/main.css"
-import "../../../assets/dashboard/styles/responsive.css"
 
 const { Header: AntHeader, Content, Sider } = Layout;
 
 function DashboardLayout() {
   const [visible, setVisible] = useState(false);
-  const [placement, setPlacement] = useState("right");
   const [sidenavColor, setSidenavColor] = useState("#1890ff");
   const [sidenavType, setSidenavType] = useState("transparent");
   const [fixed, setFixed] = useState(false);
@@ -36,36 +35,24 @@ function DashboardLayout() {
   let { pathname } = useLocation();
   pathname = pathname.replace("/", "");
 
-  useEffect(() => {
-    if (pathname === "rtl") {
-      setPlacement("left");
-    } else {
-      setPlacement("right");
-    }
-  }, [pathname]);
-
   return (
     <Layout
       className={`layout-dashboard ${
         pathname === "profile" ? "layout-profile" : ""
-      } ${pathname === "rtl" ? "layout-dashboard-rtl" : ""}`}
+      }`}
     >
       <Drawer
         title={false}
-        placement={placement === "right" ? "left" : "right"}
+        placement={"left"}
         closable={false}
         onClose={() => setVisible(false)}
         open={visible}
-        key={placement === "right" ? "left" : "right"}
+        key={"left"}
         width={250}
-        className={`drawer-sidebar ${
-          pathname === "rtl" ? "drawer-sidebar-rtl" : ""
-        } `}
+        className={`drawer-sidebar`}
       >
         <Layout
-          className={`layout-dashboard ${
-            pathname === "rtl" ? "layout-dashboard-rtl" : ""
-          }`}
+          className={`layout-dashboard`}
         >
           <Sider
             trigger={null}

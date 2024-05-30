@@ -12,6 +12,8 @@ import Billing from "./pages/dashboard/Billing";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/dashboard/Profile";
 import Tables from "./pages/dashboard/Tables";
+import ProductDetailPage from "./pages/public/ProductDetail";
+import ProductsPage from "./pages/public/ProductsPage";
 // End Dashboard Page Imports
 // End Page Imports
 
@@ -21,6 +23,9 @@ const App = () => {
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<Navigate to="/home" />} />
         <Route path="home" element={<Home />} />
+        <Route path="products" element={<ProductsPage />}>
+          <Route path="/products/:productId" element={<ProductDetailPage />} />
+        </Route>
         <Route path="login" element={<CustomerLogIn />} />
         <Route path="signup" element={<CustomerSignUp />} />
       </Route>

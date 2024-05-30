@@ -915,6 +915,34 @@ body .auth-container .auth-container-captions .title {
 body .auth-container .auth-container-captions .sub-title {
   padding: 0 4px;
 }
+body .product-detail-page {
+  padding: 20px;
+}
+body .product-detail-page .product-images {
+  display: flex;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+body .product-detail-page .product-image-thumb {
+  margin-right: 10px;
+}
+body .product-detail-page .product-size-selection {
+  margin-bottom: 10px;
+}
+body .product-detail-page .product-quantity-selection {
+  margin-bottom: 20px;
+}
+body .product-detail-page .product-actions {
+  display: flex;
+  justify-content: space-between;
+}
+body .product-detail-page .product-buy-more-save-more {
+  margin-top: 20px;
+}
+body .ant-collapse-header-text {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+}
 @media (min-width: 768px) {
   body .app-layout .header-navigation-menu,
   body .app-layout .app-footer {
