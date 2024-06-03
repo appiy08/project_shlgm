@@ -13,7 +13,7 @@
 import { HeartFilled } from "@ant-design/icons";
 import { Col, Layout, Row } from "antd";
 
-const Footer = () => {
+const DashboardFooter = () => {
   const { Footer: AntFooter } = Layout;
 
   return (
@@ -76,4 +76,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default DashboardFooter;

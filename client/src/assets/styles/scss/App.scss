@@ -368,9 +368,14 @@ body {
             margin-top: 20px;
         }
     }
-    .ant-collapse-header-text{
+    .ant-collapse-header-text {
         font-family: $primary-font-family;
         font-size: 1.25rem;
+    }
+    .product-description-editor {
+        .ql-editor {
+            min-height: 10rem;
+        }
     }
     @media (min-width: 768px) {
         .app-layout {

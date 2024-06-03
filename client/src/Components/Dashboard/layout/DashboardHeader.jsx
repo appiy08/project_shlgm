@@ -14,15 +14,11 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
 import {
-  Avatar,
-  Badge,
   Breadcrumb,
   Button,
   Col,
   Drawer,
-  Dropdown,
   Input,
-  List,
   Row,
   Switch,
   Typography,
@@ -35,19 +31,16 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 
+import { capitalize, replace } from "lodash";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
-  BellIcon,
-  ClockIcon,
-  CreditIcon,
   LogSettingIcon,
-  ProfileIcon,
+  ProfileHomeIcon,
   SettingIcon,
   ToggleIcon,
-  WiFiIcon,
-} from "../../assets/dashboard/icons";
-import avtar from "../assets/dashboard/images/team-2.jpg";
+} from "../../../assets/dashboard/icons";
+import NotificationDropdown from "./NotificationDropdown";
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -70,52 +63,14 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const data = [
-  {
-    title: "New message from Sophie",
-    description: <>{ClockIcon} 2 days ago</>,
-
-    avatar: avtar,
-  },
-  {
-    title: "New album by Travis Scott",
-    description: <>{ClockIcon} 2 days ago</>,
-
-    avatar: <Avatar shape="square">{WiFiIcon}</Avatar>,
-  },
-  {
-    title: "Payment completed",
-    description: <>{ClockIcon} 2 days ago</>,
-    avatar: <Avatar shape="square">{CreditIcon}</Avatar>,
-  },
-];
-
-const menu = (
-  <List
-    min-width="100%"
-    className="header-notifications-dropdown "
-    itemLayout="horizontal"
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={<Avatar shape="square" src={item.avatar} />}
-          title={item.title}
-          description={item.description}
-        />
-      </List.Item>
-    )}
-  />
-);
-
-const Header = ({
+const DashboardHeader = ({
   placement,
   name,
   subName,
   onPress,
+  handleFixedNavbar,
   handleSidenavColor,
   handleSidenavType,
-  handleFixedNavbar,
 }) => {
   const { Title, Text } = Typography;
 
@@ -134,23 +89,20 @@ const Header = ({
       </div>
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
-          <Breadcrumb items={[{ title: "Pages" }, { title: name }]} />
+          <Breadcrumb
+            items={[{ title: "Pages" }, { title: capitalize(replace(name, "/", " / ")) }]}
+          />
           <div className="ant-page-header-heading">
-            <span className="ant-page-header-heading-title">{subName}</span>
+            <span
+              className="ant-page-header-heading-title"
+              style={{ textTransform: "capitalize" }}
+            >
+              {capitalize(replace(subName, "/", " / "))}
+            </span>
           </div>
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
-            <Dropdown menu={menu} trigger={["click"]}>
-              <a
-                href="#pablo"
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}
-              >
-                <BellIcon />
-              </a>
-            </Dropdown>
-          </Badge>
+          <NotificationDropdown />
           <Button type="link" onClick={showDrawer}>
             <LogSettingIcon />
           </Button>
@@ -162,7 +114,7 @@ const Header = ({
             <ToggleIcon />
           </Button>
           <Drawer
-            className="settings-drawer settings-drawer-rtl"
+            className="settings-drawer"
             mask={true}
             width={360}
             onClose={hideDrawer}
@@ -208,7 +160,7 @@ const Header = ({
 
                     <Button
                       type="black"
-                      onClick={() => handleSidenavColor("black")}
+                      onClick={() => handleSidenavColor("#111")}
                     >
                       1
                     </Button>
@@ -269,12 +221,13 @@ const Header = ({
             </div>
           </Drawer>
           <Link to="/sign-in" className="btn-sign-in">
-            <ProfileIcon />
+            <ProfileHomeIcon />
             <span>Sign in</span>
           </Link>
           <Input
             className="header-search"
             placeholder="Type here..."
+            name="search"
             prefix={<SearchOutlined />}
           />
         </Col>
@@ -282,7 +235,8 @@ const Header = ({
     </>
   );
 };
-Header.propTypes = {
+
+DashboardHeader.propTypes = {
   placement: PropTypes.string,
   name: PropTypes.string,
   subName: PropTypes.string,
@@ -291,4 +245,5 @@ Header.propTypes = {
   handleSidenavType: PropTypes.func,
   handleFixedNavbar: PropTypes.func,
 };
-export default Header;
+
+export default DashboardHeader;

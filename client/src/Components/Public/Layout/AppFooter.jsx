@@ -22,7 +22,7 @@ const AppFooter = () => {
               >
                 <img
                   alt="Brand Logo"
-                  src="brand-logo/cc_shlgm_logo_primary_transparent.svg"
+                  src="/brand-logo/cc_shlgm_logo_primary_transparent.svg"
                   className="img-fluid"
                 />
               </Link>

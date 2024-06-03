@@ -2,10 +2,13 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path');
 const middlewares = require("./middlewares");
 // Routes
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
+const uploadRoutes = require('./routes/uploadRoutes');
 // Dependencies End
 // Code Begin
 
@@ -21,9 +24,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve the uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // API's Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/products", productRoutes);
+app.use('/api', uploadRoutes);
+
 
 // Connect to MongoDB
 mongoose

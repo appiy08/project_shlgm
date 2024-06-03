@@ -943,6 +943,9 @@ body .ant-collapse-header-text {
   font-family: "Playfair Display", serif;
   font-size: 1.25rem;
 }
+body .product-description-editor .ql-editor {
+  min-height: 10rem;
+}
 @media (min-width: 768px) {
   body .app-layout .header-navigation-menu,
   body .app-layout .app-footer {

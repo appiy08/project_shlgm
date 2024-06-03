@@ -19,6 +19,7 @@ import {
   Checkbox,
   Tabs,
   Tooltip,
+  Carousel,
 } from "antd";
 import {
   ShoppingCartOutlined,
@@ -51,11 +52,6 @@ const ProductDetailPage = () => {
 
   const handleBuyNow = () => {
     message.success(`Redirecting to checkout`);
-  };
-
-  const [isTermsAgreed, setIsTermsAgreed] = useState(false);
-  const handleTermsChange = (e) => {
-    setIsTermsAgreed(e.target.checked);
   };
 
   const productDetails = [
@@ -143,20 +139,31 @@ const ProductDetailPage = () => {
             alt="Product"
           />
           <div className="product-images">
-            {productImages.map((image, index) => (
-              <Image
-                key={index}
-                width={100}
-                src={image}
-                alt="Product"
-                preview={false}
-                className="product-image-thumb"
-              />
-            ))}
+            <Carousel
+              arrows={true}
+              infinite={false}
+              autoplay={true}
+              lazyLoad={true}
+              fade={true}
+              effect="fade"
+              className="hb-slideshow"
+            >
+              {productImages.map((image, index) => (
+                <div key={index}>
+                  <Image
+                    width={100}
+                    src={image}
+                    alt="Product"
+                    preview={false}
+                    className="product-image-thumb"
+                  />
+                </div>
+              ))}
+            </Carousel>
           </div>
         </Col>
         <Col xs={24} md={12}>
-          <Title level={2}>Al Fonso Dress (Upsell)</Title>
+          <Title level={2} className="playfair-display-bold">Al Fonso Dress (Upsell)</Title>
           <Rate defaultValue={4} disabled />
           <Text
             type="secondary"
@@ -206,31 +213,31 @@ const ProductDetailPage = () => {
               style={{ width: 80 }}
             />
           </div>
-          <div className="product-actions">
-            <Button
-              type="primary"
-              size="large"
-              icon={<ShoppingCartOutlined />}
-              onClick={handleAddToCart}
-            >
-              Add to Cart
-            </Button>
-            <Button
-              type="default"
-              size="large"
-              icon={<HeartOutlined />}
-              onClick={handleBuyNow}
-            >
-              Buy It Now
-            </Button>
-          </div>
-          <Checkbox
-            checked={isTermsAgreed}
-            onChange={handleTermsChange}
-            style={{ marginBottom: "10px" }}
-          >
-            I agree with the terms and conditions
-          </Checkbox>
+          <Row gutter={24}>
+            <Col xs={{ span: 24 }} md={{ span: 12 }}>
+              <Button
+                type="primary"
+                size="large"
+                block={true}
+                icon={<ShoppingCartOutlined />}
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </Button>
+            </Col>
+            <Col xs={{ span: 24 }} md={{ span: 12 }}>
+              <Button
+                type="default"
+                size="large"
+                block={true}
+                icon={<HeartOutlined />}
+                onClick={handleBuyNow}
+              >
+                Buy It Now
+              </Button>
+            </Col>
+          </Row>
+
           <div className="product-buy-more-save-more">
             <Title level={5}>BUY MORE SAVE MORE!</Title>
             <Tag color="green" style={{ marginBottom: "10px" }}>
@@ -245,7 +252,7 @@ const ProductDetailPage = () => {
       <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
         <Col span={24}>
           <Divider orientation="left">
-            <Title level={4}>Description</Title>
+            <Title level={4} className="playfair-display-bold">Description</Title>
           </Divider>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -279,27 +286,27 @@ const ProductDetailPage = () => {
       <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
         <Col span={24}>
           <Divider orientation="left">
-            <Title level={4}>Review</Title>
+            <Title level={4} className="playfair-display-bold">Review</Title>
           </Divider>
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
         <Col span={24}>
           <Divider orientation="left">
-            <Title level={4}>Shipping</Title>
+            <Title level={4} className="playfair-display-bold">Shipping</Title>
           </Divider>
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
         <Col span={24}>
           <Divider orientation="left">
-            <Title level={4}>Return</Title>
+            <Title level={4} className="playfair-display-bold">Return</Title>
           </Divider>
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "40px" }}>
         <Col span={24}>
-          <Title level={3} style={{ marginBottom: "20px" }}>
+          <Title level={3} className="playfair-display-bold" style={{ marginBottom: "20px" }}>
             You may also like
           </Title>
           <Row gutter={[16, 16]}>
@@ -348,7 +355,7 @@ const ProductDetailPage = () => {
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "40px" }}>
         <Col span={24}>
-          <Title level={3} style={{ marginBottom: "20px" }}>
+          <Title level={3} className="playfair-display-bold" style={{ marginBottom: "20px" }}>
             Recently Viewed Products
           </Title>
           <Row gutter={[16, 16]}>

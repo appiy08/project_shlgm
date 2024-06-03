@@ -6,7 +6,7 @@ import AppHeader from "./AppHeader";
 // End Imports
 const { Content } = Layout;
 
-const PublicLayout = () => {
+const AppLayout = () => {
 
   return (
     <>
@@ -22,4 +22,4 @@ const PublicLayout = () => {
     </>
   );
 };
-export default PublicLayout;
+export default AppLayout;

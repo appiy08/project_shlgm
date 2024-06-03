@@ -1,0 +1,12 @@
+[
+  { "name": "Fashion", "value": "fashion" },
+  { "name": "Handbags", "value": "handbags" },
+  { "name": "Footwear", "value": "footwear" },
+  { "name": "Watches", "value": "watches" },
+  { "name": "Jewelry", "value": "jewelry" },
+  { "name": "Accessories", "value": "accessories" },
+  { "name": "Fragrances", "value": "fragrances" },
+  { "name": "Cosmetics", "value": "cosmetics" },
+  { "name": "Skincare", "value": "skincare" },
+  { "name": "Eyewear", "value": "eyewear" }
+]

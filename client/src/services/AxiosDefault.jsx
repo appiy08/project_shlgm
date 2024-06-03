@@ -1,15 +1,17 @@
 import axios from "axios";
-// import { useAuthContext } from "../hooks/auth/useAuthContext";
+import { get } from "lodash";
+import { Cookies } from "react-cookie";
 // End Imports
 
+const serverBaseUrl = import.meta.env.VITE_BASE_URL;
 
-const serverBaseUrl = import.meta.env.VITE_BASE_URL
+const cookies = new Cookies();
+
+const auth_credentials = cookies.get("auth_credentials");
 
 const useAxiosDefault = () => {
-  // const { user, dispatch } = useAuthContext();
-
-  const handleLogout = (dispatch) => {
-    dispatch({ type: "LOGOUT" });
+  const handleLogout = () => {
+    cookies.remove("auth_credentials");
     window.location.replace("/");
   };
 
@@ -24,7 +26,7 @@ const useAxiosDefault = () => {
 
   AxiosDefault.interceptors.request.use(
     (config) => {
-      const authToken = `Bearer`;
+      const authToken = `Bearer ${get(auth_credentials, "_id", "")}`;
       if (authToken) {
         config.headers.Authorization = authToken;
       }
@@ -32,7 +34,7 @@ const useAxiosDefault = () => {
     },
     (error) => {
       return Promise.reject(error);
-    },
+    }
   );
 
   AxiosDefault.interceptors.response.use(
@@ -41,10 +43,10 @@ const useAxiosDefault = () => {
     },
     async (error) => {
       if (error?.response?.status === 401) {
-        handleLogout(() => {});
+        handleLogout();
       }
       return Promise.reject(error);
-    },
+    }
   );
 
   return { AxiosDefault };

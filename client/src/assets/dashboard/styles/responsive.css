@@ -53,32 +53,5 @@
   .card-billing-info.ant-card .ant-card-body {
     display: flex;
   }
-  .layout-dashboard-rtl {
-    overflow: auto;
-  }
-  .layout-dashboard-rtl .ant-layout-sider.sider-primary {
-    margin: 20px 20px 0 0;
-    height: calc(100vh - 20px);
-  }
-  .layout-dashboard-rtl .ant-layout-sider.sider-primary {
-    right: 0;
-    left: auto;
-  }
-  .layout-dashboard-rtl .ant-layout-sider.sider-primary {
-    right: 0;
-    left: auto;
-  }
-  .layout-dashboard-rtl .ant-layout {
-    margin-right: 270px;
-    margin-left: 0;
-  }
-  .layout-dashboard-rtl .ant-layout-footer {
-    margin: 0 20px 20px 0;
-  }
 }
 
-@media (max-width: 768px) {
-  .layout-dashboard.layout-dashboard-rtl .header-control {
-    justify-content: flex-end;
-  }
-}

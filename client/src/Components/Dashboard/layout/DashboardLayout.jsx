@@ -15,9 +15,9 @@ import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import "../../../assets/dashboard/styles/main.css";
 import "../../../assets/dashboard/styles/responsive.css";
-import Footer from "./Footer";
-import Header from "./Header";
-import Sidenav from "./Sidenav";
+import DashboardFooter from "./DashboardFooter";
+import DashboardHeader from "./DashboardHeader";
+import DashboardSidenav from "./DashboardSidenav";
 
 const { Header: AntHeader, Content, Sider } = Layout;
 
@@ -63,7 +63,7 @@ function DashboardLayout() {
             }`}
             style={{ background: sidenavType }}
           >
-            <Sidenav color={sidenavColor} />
+            <DashboardSidenav color={sidenavColor} />
           </Sider>
         </Layout>
       </Drawer>
@@ -81,13 +81,13 @@ function DashboardLayout() {
         }`}
         style={{ background: sidenavType }}
       >
-        <Sidenav color={sidenavColor} />
+        <DashboardSidenav color={sidenavColor} />
       </Sider>
       <Layout>
         {fixed ? (
           <Affix>
             <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
-              <Header
+              <DashboardHeader
                 onPress={openDrawer}
                 name={pathname}
                 subName={pathname}
@@ -99,7 +99,7 @@ function DashboardLayout() {
           </Affix>
         ) : (
           <AntHeader className={`${fixed ? "ant-header-fixed" : ""}`}>
-            <Header
+            <DashboardHeader
               onPress={openDrawer}
               name={pathname}
               subName={pathname}
@@ -112,7 +112,7 @@ function DashboardLayout() {
         <Content className="content-ant">
           <Outlet />
         </Content>
-        <Footer />
+        <DashboardFooter />
       </Layout>
     </Layout>
   );

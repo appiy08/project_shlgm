@@ -11,8 +11,7 @@ const { Header } = Layout;
 const AppHeader = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { state } = useAuthContext();
-  const auth_credentials = get(state, "auth_credentials", {});
+  const { auth_credentials } = useAuthContext();
   const [currentSelectMenu, setCurrentSelectMenu] = useState("1");
 
   const onClickMenu = (e) => {
@@ -38,7 +37,7 @@ const AppHeader = () => {
       <Flex align="center" justify="space-between" style={{ height: "100%" }}>
         <div className="brand-logo">
           <Link to="/">
-            <img src="brand-logo/cc_brand_name_primary.svg" alt="Brand Logo" />
+            <img src="/brand-logo/cc_brand_name_primary.svg" alt="Brand Logo" />
           </Link>
         </div>
         <Flex align="center" gap="middle">
