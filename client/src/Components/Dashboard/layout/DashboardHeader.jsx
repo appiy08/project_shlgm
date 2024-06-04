@@ -32,14 +32,13 @@ import {
 } from "@ant-design/icons";
 
 import { capitalize, replace } from "lodash";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   LogSettingIcon,
-  ProfileHomeIcon,
   SettingIcon,
-  ToggleIcon,
+  ToggleIcon
 } from "../../../assets/dashboard/icons";
+import DashboardAccountDropdown from "./DashboardAccountDropdown";
 import NotificationDropdown from "./NotificationDropdown";
 
 const ButtonContainer = styled.div`
@@ -220,10 +219,7 @@ const DashboardHeader = ({
               </div>
             </div>
           </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
-            <ProfileHomeIcon />
-            <span>Sign in</span>
-          </Link>
+          <DashboardAccountDropdown/>
           <Input
             className="header-search"
             placeholder="Type here..."

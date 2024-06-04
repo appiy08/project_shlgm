@@ -18,16 +18,17 @@ import { get, map } from "lodash";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
+// import { imageUpload } from "../../lib/actions/common/imageUpload";
 import { productCreate } from "../../lib/actions/product";
 import ColorsList from "../../lib/data/ColorsList.json";
 import LuxuryBrandsList from "../../lib/data/LuxuryBrandsList.json";
 import LuxuryGoodsCategoriesList from "../../lib/data/LuxuryGoodsCategoriesList.json";
 import ProductConditionsList from "../../lib/data/ProductConditionsList.json";
-import { imageUpload } from "../../lib/actions/common/imageUpload";
-import { useAuthContext } from "../../hooks/auth/useAuthContext";
 // End Imports
 const { Title, Text } = Typography;
 const { Option } = Select;
+const { Dragger } = Upload;
 
 const formItemLayout = {
   labelCol: {
@@ -49,7 +50,6 @@ const ProductCreate = () => {
   const [images, setImages] = useState([]);
   const [colors, setColors] = useState([]);
 
-
   const handleColorChange = (value) => {
     const newColors = [...colors];
     const index = newColors.indexOf(value);
@@ -61,31 +61,68 @@ const ProductCreate = () => {
     setColors(newColors);
   };
 
-  const handleUpload = async (e) => {
-    console.log("file ::>>", e);
-    const formData = new FormData();
-    // formData.append("image", file);
-
-    await imageUpload(formData)
-      .then((response) => {
-        message.success("Upload successful!");
-        console.log("Image URL:", response.data.imageUrl);
-        setImages((prevState) => [...prevState, get(response, "data.imageUrl", "")]);
-      })
-      .catch((error) => {
-        message.error("Upload failed.");
-        console.log("error ::", error);
-      });
+  const uploadProps = {
+    name: "images",
+    accept:
+      "image/apng, image/gif, image/jpeg, image/pjpeg, image/png, image/svg+xml, image/webp",
+    multiple: true,
+    maxCount: 6,
+    listType: "picture",
+    action: "http://localhost:8120/api/upload",
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (status === "done") {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onSuccess(res) {
+      setImages((prevState) => [...prevState, get(res, "imageUrl", "")]);
+    },
   };
 
+  // const handleImageUpload = async (info) => {
+  //   console.log("file ::>>", info);
+  //   const formData = new FormData();
+  //   formData.append("image", file);
+
+  //   await imageUpload(formData)
+  //     .then((response) => {
+  //       message.success("Upload successful!");
+  //       console.log("Image URL:", response.data.imageUrl);
+  //       setImages((prevState) => [
+  //         ...prevState,
+  //         get(response, "data.imageUrl", ""),
+  //       ]);
+  //     })
+  //     .catch((error) => {
+  //       message.error("Upload failed.");
+  //       console.log("error ::", error);
+  //     });
+  // };
+
   const handleSubmit = async (values) => {
-    const formData = { ...values, seller: get(auth_credentials, "_id", "") };
-    console.log("formData :>:>", formData);
+    const formData = {
+      ...values,
+      images: images,
+      seller: get(auth_credentials, "_id", ""),
+    };
+
     try {
       const response = await productCreate(formData);
       console.log(response);
+      if (get(response, "data.status", "0") === 200) {
+        message.success(
+          get(response, "data.message", "Product created successfully")
+        );
+      }
     } catch (error) {
       console.error(error);
+      message.error('Something went wrong')
     }
   };
 
@@ -178,7 +215,7 @@ const ProductCreate = () => {
                     return (
                       <Option key={index} value={get(data, "value", "")}>
                         <Flex justify="space-between" gap={8}>
-                          <Text>{get(data, "name", "")}</Text>
+                          <Text>{get(data, "label", "")}</Text>
                           <Space />
                           <span
                             style={{
@@ -229,8 +266,8 @@ const ProductCreate = () => {
                 <Select style={{ width: "100%" }}>
                   {map(LuxuryBrandsList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "name", "")}>
-                        {get(data, "name", "")}
+                      <Option key={index} value={get(data, "label", "")}>
+                        {get(data, "label", "")}
                       </Option>
                     );
                   })}
@@ -250,8 +287,8 @@ const ProductCreate = () => {
                 <Select style={{ width: "100%" }}>
                   {map(LuxuryGoodsCategoriesList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "name", "")}>
-                        {get(data, "name", "")}
+                      <Option key={index} value={get(data, "label", "")}>
+                        {get(data, "label", "")}
                       </Option>
                     );
                   })}
@@ -271,8 +308,8 @@ const ProductCreate = () => {
                 <Select style={{ width: "100%" }}>
                   {map(ProductConditionsList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "name", "")}>
-                        {get(data, "name", "")}
+                      <Option key={index} value={get(data, "label", "")}>
+                        {get(data, "label", "")}
                       </Option>
                     );
                   })}
@@ -310,6 +347,20 @@ const ProductCreate = () => {
                 <Checkbox />
               </Form.Item>
 
+              
+              <Form.Item
+                label="Stock"
+                name="stock"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter stock",
+                  },
+                ]}
+              >
+                <Input type="number" />
+              </Form.Item>
+
               <Form.Item
                 label="Images"
                 name="images"
@@ -320,23 +371,18 @@ const ProductCreate = () => {
                   },
                 ]}
               >
-                <Upload.Dragger
-                  name="images"
-                  multiple={true}
-                  fileList={images}
-                  customRequest={handleUpload}
-                >
+                <Dragger {...uploadProps}>
                   <p className="ant-upload-drag-icon">
                     <InboxOutlined />
                   </p>
                   <p className="ant-upload-text">
-                    Click or drag files to this area to upload
+                    Click or drag file to this area to upload
                   </p>
                   <p className="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from
-                    uploading company data or other band files
+                    Support for a single or bulk upload. Strictly prohibited
+                    from uploading company data or other banned files.
                   </p>
-                </Upload.Dragger>
+                </Dragger>
               </Form.Item>
 
               <Form.Item

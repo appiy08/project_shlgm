@@ -67,7 +67,7 @@ const CustomerLogInForm = () => {
         name="signup"
         onFinish={onSubmit}
         initialValues={{
-          role: "buyer",
+          role: "customer",
         }}
         requiredMark={false}
         scrollToFirstError

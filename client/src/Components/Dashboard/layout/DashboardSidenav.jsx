@@ -14,16 +14,18 @@ import { Divider, Flex, Menu, Typography } from "antd";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../../hooks/auth/useAuthContext";
+import { get } from "lodash";
 
 const { Text } = Typography;
 
 const DashboardSidenav = ({ color }) => {
+  const { auth_credentials } = useAuthContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const defaultPath = pathname.split("/").pop();
   const [current, setCurrent] = useState(defaultPath);
   const onClick = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
     navigate(e.item.props.path);
   };
@@ -55,28 +57,30 @@ const DashboardSidenav = ({ color }) => {
         </span>
       ),
     },
-    {
-      label: <span className="label">Products</span>,
-      key: "products",
-      path: "/dashboard/products",
-      icon: (
-        <span
-          className="icon"
-          style={{
-            background: defaultPath === "products" ? color : "",
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 1024 1024"
-          >
-            <path d="M909.5 544l-359-362.4c-8-8.1-18.7-12.6-30.2-12.6H158c-34.2 0-62 27.5-62 61.4V454c0 11.2 4.4 21.7 12.4 29.7L467 838c11.8 11.5 27.3 17.9 43.8 17.9s32-6.3 43.8-17.9l28.3-28 28.3 28c11.8 11.5 27.3 17.9 43.8 17.9s32-6.4 43.8-17.9L909 630.3c24-23.6 24.2-62.3.5-86.3zM280.1 439c-42.6 0-77.2-34.6-77.2-77.2s34.6-77.2 77.2-77.2 77.2 34.6 77.2 77.2c-.1 42.6-34.6 77.2-77.2 77.2zm588.7 150.6L658.6 797.3c-1 1-2.2 1.4-3.6 1.4s-2.6-.5-3.6-1.4l-32.1-31.7L760.6 626c21.7-21.4 21.8-56.1.4-77.8L442 226.1h72.2l354.6 358.1c.3.3 1.1 1.2 1.1 2.7.1 1.4-.5 2.2-1.1 2.7zM280.1 335.9c-14.3 0-26 11.7-26 26s11.7 26 26 26 26-11.7 26-26-11.7-26-26-26z" />
-          </svg>
-        </span>
-      ),
-    },
+    get(auth_credentials, "role", "")==='admin'||get(auth_credentials, "role", "")==='seller'
+      ? {
+          label: <span className="label">Products</span>,
+          key: "products",
+          path: "/dashboard/products",
+          icon: (
+            <span
+              className="icon"
+              style={{
+                background: defaultPath === "products" ? color : "",
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 1024 1024"
+              >
+                <path d="M909.5 544l-359-362.4c-8-8.1-18.7-12.6-30.2-12.6H158c-34.2 0-62 27.5-62 61.4V454c0 11.2 4.4 21.7 12.4 29.7L467 838c11.8 11.5 27.3 17.9 43.8 17.9s32-6.3 43.8-17.9l28.3-28 28.3 28c11.8 11.5 27.3 17.9 43.8 17.9s32-6.4 43.8-17.9L909 630.3c24-23.6 24.2-62.3.5-86.3zM280.1 439c-42.6 0-77.2-34.6-77.2-77.2s34.6-77.2 77.2-77.2 77.2 34.6 77.2 77.2c-.1 42.6-34.6 77.2-77.2 77.2zm588.7 150.6L658.6 797.3c-1 1-2.2 1.4-3.6 1.4s-2.6-.5-3.6-1.4l-32.1-31.7L760.6 626c21.7-21.4 21.8-56.1.4-77.8L442 226.1h72.2l354.6 358.1c.3.3 1.1 1.2 1.1 2.7.1 1.4-.5 2.2-1.1 2.7zM280.1 335.9c-14.3 0-26 11.7-26 26s11.7 26 26 26 26-11.7 26-26-11.7-26-26-26z" />
+              </svg>
+            </span>
+          ),
+        }
+      : null,
     {
       type: "group",
       label: <span className="label">Account</span>,
@@ -122,15 +126,15 @@ const DashboardSidenav = ({ color }) => {
             alt="Brand Logo"
             width={48}
             height={48}
-            />
-            </Link>
-          <Text
-            className="playfair-display-bold"
-            style={{ fontSize: "1.375rem" }}
-            strong
-          >
-            Celestial Chic
-          </Text>
+          />
+        </Link>
+        <Text
+          className="playfair-display-bold"
+          style={{ fontSize: "1.375rem" }}
+          strong
+        >
+          Celestial Chic
+        </Text>
       </Flex>
       <Divider />
       <Menu

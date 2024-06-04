@@ -1,12 +1,13 @@
 [
-  { "name": "Fashion", "value": "fashion" },
-  { "name": "Handbags", "value": "handbags" },
-  { "name": "Footwear", "value": "footwear" },
-  { "name": "Watches", "value": "watches" },
-  { "name": "Jewelry", "value": "jewelry" },
-  { "name": "Accessories", "value": "accessories" },
-  { "name": "Fragrances", "value": "fragrances" },
-  { "name": "Cosmetics", "value": "cosmetics" },
-  { "name": "Skincare", "value": "skincare" },
-  { "name": "Eyewear", "value": "eyewear" }
+  { "label": "All", "value": "all" },
+  { "label": "Fashion", "value": "fashion" },
+  { "label": "Handbags", "value": "handbags" },
+  { "label": "Footwear", "value": "footwear" },
+  { "label": "Watches", "value": "watches" },
+  { "label": "Jewelry", "value": "jewelry" },
+  { "label": "Accessories", "value": "accessories" },
+  { "label": "Fragrances", "value": "fragrances" },
+  { "label": "Cosmetics", "value": "cosmetics" },
+  { "label": "Skincare", "value": "skincare" },
+  { "label": "Eyewear", "value": "eyewear" }
 ]

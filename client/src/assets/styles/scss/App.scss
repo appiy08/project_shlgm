@@ -338,6 +338,11 @@ body {
             }
         }
     }
+    .products-categories-box{
+        .ant-segmented-group{
+            flex-wrap: wrap;
+        }
+    }
     .product-detail-page {
         padding: 20px;
 

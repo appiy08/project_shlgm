@@ -13,8 +13,8 @@ const userSchema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ["buyer", "seller", "user"],
-    default: "buyer",
+    enum: ["customer", "seller", "admin"],
+    default: "customer",
   },
   agreement: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now },

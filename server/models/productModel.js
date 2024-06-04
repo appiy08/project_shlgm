@@ -52,6 +52,10 @@ const productSchema = Schema({
     type: Boolean,
     required: true,
   },
+  stock: {
+    type: Number,
+    required: true,
+  },
   condition: {
     type: String,
   },

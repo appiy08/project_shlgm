@@ -1,11 +1,11 @@
 [
-  { "name": "New with tags", "value": "new-with-tags" },
-  { "name": "New without tags", "value": "new-without-tags" },
-  { "name": "Like new", "value": "like-new" },
-  { "name": "Excellent", "value": "excellent" },
-  { "name": "Very good", "value": "very-good" },
-  { "name": "Good", "value": "good" },
-  { "name": "Fair", "value": "fair" },
-  { "name": "Poor", "value": "poor" },
-  { "name": "For parts or not working", "value": "for-parts-or-not-working" }
+  { "label": "New with tags", "value": "new-with-tags" },
+  { "label": "New without tags", "value": "new-without-tags" },
+  { "label": "Like new", "value": "like-new" },
+  { "label": "Excellent", "value": "excellent" },
+  { "label": "Very good", "value": "very-good" },
+  { "label": "Good", "value": "good" },
+  { "label": "Fair", "value": "fair" },
+  { "label": "Poor", "value": "poor" },
+  { "label": "For parts or not working", "value": "for-parts-or-not-working" }
 ]

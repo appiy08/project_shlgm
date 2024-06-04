@@ -8,7 +8,7 @@ export const imageUpload = (values) => {
       data: values,
       headers: {
         "Content-Type": "multipart/form-data",
-      },
+      }  
     })
       .then((res) => {
         resolve(res.data);

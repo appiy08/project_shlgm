@@ -915,6 +915,9 @@ body .auth-container .auth-container-captions .title {
 body .auth-container .auth-container-captions .sub-title {
   padding: 0 4px;
 }
+body .products-categories-box .ant-segmented-group {
+  flex-wrap: wrap;
+}
 body .product-detail-page {
   padding: 20px;
 }

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const orderSchema = new Schema({
-  buyer: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  customer: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   products: [
     {
       product: {

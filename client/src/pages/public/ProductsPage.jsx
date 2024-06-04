@@ -1,199 +1,25 @@
-import {
-  Button,
-  Col,
-  Layout,
-  Row,
-  Space,
-  Typography
-} from "antd";
-import { useState } from "react";
+import { Button, Col, Layout, Row, Space, Spin, Typography } from "antd";
+import { get, map, size } from "lodash";
+import { useEffect, useState } from "react";
 import { ToggleIcon } from "../../assets/dashboard/icons";
 import ProductCard from "../../Components/Common/ProductCard";
 import ProductsPageSidenav from "../../Components/Public/Pages/Products/ProductsPageSidenav";
+import { productsGet } from "../../lib/actions/product";
 // End Imports
 const { Title, Text } = Typography;
 const { Content } = Layout;
 
-const products = [
-  {
-    id: 1,
-    name: "AL FONSO DRESS (UPSELL)",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 5824,
-    originalPrice: 6240,
-    discount: 16,
-    rating: 4,
-    reviews: 1,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akatsuki Store",
-    inStock: true,
-  },
-  {
-    id: 2,
-    name: "BOUGHT TOGETHER",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6240,
-    originalPrice: 7488,
-    discount: 16,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akaza Store",
-    inStock: true,
-  },
-  {
-    id: 3,
-    name: "CASCATA WIDE BRIM HAT",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6656,
-    originalPrice: 6656,
-    discount: 0,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Lulu Store",
-    inStock: true,
-  },
-  {
-    id: 4,
-    name: "CLEO MINI DRESS",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6656,
-    originalPrice: 6656,
-    discount: 0,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "SE Store",
-    inStock: true,
-  },
-  {
-    id: 5,
-    name: "KAESHA YORK DRESS",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6240,
-    originalPrice: 6240,
-    discount: 0,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Wpbingo",
-    inStock: true,
-  },
-  {
-    id: 6,
-    name: "LARGE ESSENTIAL HOOP",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 5824,
-    originalPrice: 6656,
-    discount: 18,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akatsuki Store",
-    inStock: true,
-  },
-  {
-    id: 7,
-    name: "MADDS ONE SHOULDER TOP",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6240,
-    originalPrice: 6656,
-    discount: 21,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akaza Store",
-    inStock: true,
-  },
-  {
-    id: 8,
-    name: "PHOENIX MINI DRESS",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 4576,
-    originalPrice: 5824,
-    discount: 12,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Lulu Store",
-    inStock: true,
-  },
-  {
-    id: 9,
-    name: "REESE CUPRO MINI DRESS",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 5408,
-    originalPrice: 5408,
-    discount: 0,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "SE Store",
-    inStock: true,
-  },
-  {
-    id: 10,
-    name: "SICILY SLIDE",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 5824,
-    originalPrice: 6656,
-    discount: 12,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Wpbingo",
-    inStock: true,
-  },
-  {
-    id: 11,
-    name: "STAR ESSENTIAL RING",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 4992,
-    originalPrice: 4992,
-    discount: 0,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akatsuki Store",
-    inStock: true,
-  },
-  {
-    id: 12,
-    name: "SUZIE MIDI DRESS",
-    imageUrl: "https://dummyimage.com/300x300/000/fff",
-    price: 6656,
-    originalPrice: 7488,
-    discount: 11,
-    rating: 0,
-    reviews: 0,
-    colors: ["#f5f5f5", "#d4ac0d"],
-    sizes: ["S", "M", "L"],
-    brand: "Akaza Store",
-    inStock: true,
-  },
-];
-
 const ProductsPage = () => {
+  const [fetchLoading, setFetchLoading] = useState(false);
+  const [products, setProducts] = useState([]);
   const [visible, setVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6);
+  const [productsPerPage] = useState(10);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 7904]);
+  const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000000]);
   const [showInStockOnly, setShowInStockOnly] = useState(false);
 
   const handleBrandChange = (value) => {
@@ -259,6 +85,32 @@ const ProductsPage = () => {
 
   const toggleSidenav = () => setVisible(!visible);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setFetchLoading(true);
+      try {
+        const response = await productsGet();
+        const data = get(response, "data");
+        setProducts(data);
+        setFilteredProducts(data);
+        setFetchLoading(false);
+      } catch (error) {
+        console.error(error);
+        setFetchLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // const handleFilterChange = (filterValue) => {
+  //   const filteredData = products.filter((product) => {
+  //     // implement your filtering logic here
+  //     return product.name.includes(filterValue);
+  //   });
+  //   setFilteredProducts(filteredData);
+  // };
+
+
   return (
     <Layout style={{ position: "relative", padding: "1.5rem 0" }}>
       <ProductsPageSidenav
@@ -302,23 +154,33 @@ const ProductsPage = () => {
         </Row>
         <Content>
           <Row gutter={[24, 24]}>
-            {currentProducts.map((product) => (
-              <Col
-                key={product.id}
-                xs={{ span: 24 }}
-                md={{ span: 12 }}
-                lg={{ span: 8 }}
-                xxl={{ span: 6 }}
-              >
-                <ProductCard
-                  product={product}
-                  selectedColor={selectedColor}
-                  handleColorChange={handleColorChange}
-                  selectedSize={selectedSize}
-                  handleSizeChange={handleSizeChange}
-                />
+            {fetchLoading && size(filteredProducts) > 0 ? (
+              <Col span={24} style={{ textAlign: "center" }}>
+                <Spin />
               </Col>
-            ))}
+            ) : (
+              map(filteredProducts, (data, index) => {
+                console.log("Rendering product card for:", data);
+                return (
+                  <Col
+                    key={get(data, "_id", index)}
+                    xs={{ span: 24 }}
+                    md={{ span: 12 }}
+                    lg={{ span: 8 }}
+                    xxl={{ span: 6 }}
+                  >
+                    <ProductCard
+                      key={index}
+                      product={data}
+                      selectedColor={selectedColor}
+                      handleColorChange={handleColorChange}
+                      selectedSize={selectedSize}
+                      handleSizeChange={handleSizeChange}
+                    />
+                  </Col>
+                );
+              })
+            )}
           </Row>
           <div style={{ marginTop: "3rem", textAlign: "center" }}>
             {filteredProducts.length > 0 && (

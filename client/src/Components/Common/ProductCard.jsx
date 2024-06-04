@@ -1,4 +1,5 @@
 import { Button, Card, Image, Rate, Select, Space, Typography } from "antd";
+import { get, map } from "lodash";
 import PropTypes from "prop-types";
 // End Imports
 const { Text } = Typography;
@@ -10,29 +11,40 @@ const ProductCard = ({
   handleColorChange,
   selectedSize,
   handleSizeChange,
+  ...rest
 }) => {
   return (
-    <Card hoverable cover={<Image src={product.imageUrl} alt={product.name} />}>
+    <Card
+      {...rest}
+      hoverable
+      cover={
+        <Image
+          src={get(product, "images[0]")}
+          alt={get(product, "name", "image")}
+        />
+      }
+    >
       <Card.Meta
-        title={<a href="#">{product.name}</a>}
+        title={<a href="#">{get(product, "name", "")}</a>}
         description={
           <div>
-            <Rate allowHalf defaultValue={product.rating} disabled />
-            {product.reviews} {product.reviews > 1 ? "reviews" : "review"}
+            <Rate allowHalf defaultValue={get(product, "rating", 0)} disabled />
+            {get(product, "reviews", 0)}{" "}
+            {get(product, "reviews") > 1 ? "reviews" : "review"}
           </div>
         }
       />
       <div style={{ marginTop: 16 }}>
         {product.discount > 0 && (
           <Text type="danger" style={{ textDecoration: "line-through" }}>
-            Rs. {product.originalPrice.toFixed(2)}
+            Rs. {get(product, "originalPrice", 0)}
           </Text>
         )}
-        <Text style={{ fontSize: 20 }}>Rs. {product.price.toFixed(2)}</Text>
+        <Text style={{ fontSize: 20 }}>Rs. {get(product, "price", 0)}</Text>
       </div>
       <Space style={{ marginTop: 16 }}>
-        {product.colors &&
-          product.colors.map((color) => (
+        {get(product, "colors", []) &&
+          map(get(product, "colors", []), (color) => (
             <Button
               key={color}
               onClick={() => handleColorChange(color)}
@@ -49,14 +61,14 @@ const ProductCard = ({
               }}
             />
           ))}
-        {product.sizes && (
+        {get(product, "sizes", []) && (
           <Select
-            defaultValue={product.sizes[0]}
+            defaultValue={get(product, "sizes[0]")}
             value={selectedSize}
             onChange={handleSizeChange}
             style={{ width: 120 }}
           >
-            {product.sizes.map((size) => (
+            {map(get(product, "sizes"), (size) => (
               <Option key={size} value={size}>
                 {size}
               </Option>
