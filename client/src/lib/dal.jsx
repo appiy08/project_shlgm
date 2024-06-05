@@ -24,7 +24,6 @@ export const getUser = cache(async () => {
 
   try {
     const result = await getUserData(session.userId);
-    console.log("get user data", result);
 
     if (_.get(result, "status") === 200) {
       const user = _.get(result, "data.data");

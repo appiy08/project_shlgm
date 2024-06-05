@@ -8,6 +8,8 @@ const middlewares = require("./middlewares");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const uploadRoutes = require('./routes/uploadRoutes');
 // Dependencies End
 // Code Begin
@@ -31,6 +33,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 app.use('/api', uploadRoutes);
 
 

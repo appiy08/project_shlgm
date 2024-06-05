@@ -6,7 +6,11 @@ export const productsGet = (params) => {
   return new Promise((resolve, reject) => {
     var URL = "";
     if (get(params, "category", "")) {
-      URL = `products?category="${get(params, "category", "")}"`;
+      if (get(params, "category", "") === "all") {
+        URL = `products`;
+      } else {
+        URL = `products?category="${get(params, "category", "")}"`;
+      }
     } else if (get(params, "brand", "")) {
       URL = `products?category="${get(params, "brand", "")}"`;
     } else if (
@@ -25,6 +29,21 @@ export const productsGet = (params) => {
     AxiosDefault({
       method: "GET",
       url: URL,
+    })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const productGetByID = (params) => {
+  return new Promise((resolve, reject) => {
+    AxiosDefault({
+      method: "GET",
+      url: `products/${params}`,
     })
       .then((res) => {
         resolve(res.data);

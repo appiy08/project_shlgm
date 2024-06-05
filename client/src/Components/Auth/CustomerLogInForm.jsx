@@ -41,18 +41,23 @@ const CustomerLogInForm = () => {
           openNotificationWithIcon({
             type: "success",
             title: "Success",
-            ...get(result, "data", {}),
+            message: get(result, "message", "Login Successfully"),
           });
           navigate("/");
         } else {
           openNotificationWithIcon({
             type: "error",
             title: "Error",
-            ...get(result, "data", {}),
+            message: get(result, "message", "Something went wrong"),
           });
         }
       })
       .catch((err) => {
+        openNotificationWithIcon({
+          type: "error",
+          title: "Error",
+          message: get(err, "response.error", "Something went wrong"),
+        });
         throw err;
       });
   };

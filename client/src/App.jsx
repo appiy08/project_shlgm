@@ -8,6 +8,10 @@ import CustomerSignUp from "./pages/auth/CustomerSignUp";
 import Home from "./pages/public/Home";
 import ProductDetailPage from "./pages/public/ProductDetail";
 import ProductsPage from "./pages/public/ProductsPage";
+import CartPage from "./pages/public/CartPage";
+import CheckoutPage from "./pages/public/CheckoutPage";
+import AddAddressPage from "./pages/public/AddAddressPage";
+import PaymentPage from "./pages/public/PaymentPage";
 // End Public Page Imports
 // Begin Dashboard Page Imports
 import { get, isEmpty } from "lodash";
@@ -16,7 +20,6 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import ProductCreate from "./pages/dashboard/ProductCreate";
 import Products from "./pages/dashboard/Products";
 import Profile from "./pages/dashboard/Profile";
-
 // End Dashboard Page Imports
 // End Page Imports
 
@@ -30,6 +33,10 @@ const App = () => {
         <Route path="home" element={<Home />} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/:productId" element={<ProductDetailPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="address" element={<AddAddressPage />} />
+        <Route path="payment" element={<PaymentPage />} />
         <Route
           path="login"
           element={

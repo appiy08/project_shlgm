@@ -25,6 +25,7 @@ import ColorsList from "../../lib/data/ColorsList.json";
 import LuxuryBrandsList from "../../lib/data/LuxuryBrandsList.json";
 import LuxuryGoodsCategoriesList from "../../lib/data/LuxuryGoodsCategoriesList.json";
 import ProductConditionsList from "../../lib/data/ProductConditionsList.json";
+import { useNavigate } from "react-router-dom";
 // End Imports
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -45,6 +46,7 @@ const formItemLayout = {
 
 const ProductCreate = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate()
   const { auth_credentials } = useAuthContext();
 
   const [images, setImages] = useState([]);
@@ -114,11 +116,11 @@ const ProductCreate = () => {
 
     try {
       const response = await productCreate(formData);
-      console.log(response);
-      if (get(response, "data.status", "0") === 200) {
+      if (get(response, "status", "0") === 200) {
         message.success(
-          get(response, "data.message", "Product created successfully")
+          get(response, "message", "Product created successfully")
         );
+        navigate('/dashboard/products')
       }
     } catch (error) {
       console.error(error);
@@ -256,6 +258,7 @@ const ProductCreate = () => {
               <Form.Item
                 label="Brand"
                 name="brand"
+                mode="tags"
                 rules={[
                   {
                     required: true,
@@ -287,7 +290,7 @@ const ProductCreate = () => {
                 <Select style={{ width: "100%" }}>
                   {map(LuxuryGoodsCategoriesList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "label", "")}>
+                      <Option key={index} value={get(data, "value", "")}>
                         {get(data, "label", "")}
                       </Option>
                     );
@@ -308,7 +311,7 @@ const ProductCreate = () => {
                 <Select style={{ width: "100%" }}>
                   {map(ProductConditionsList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "label", "")}>
+                      <Option key={index} value={get(data, "value", "")}>
                         {get(data, "label", "")}
                       </Option>
                     );

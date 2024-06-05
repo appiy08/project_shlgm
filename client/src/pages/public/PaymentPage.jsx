@@ -1,6 +1,6 @@
 import { CreditCardOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Form, Row } from 'antd';
-import React from 'eact';
+import { Button, Card, Col, Form, Input, Row } from 'antd';
+
 
 const PaymentPage = () => {
   const [form] = Form.useForm();

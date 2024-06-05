@@ -17,8 +17,9 @@ const AppBottomNavigation = () => {
   const [currentSelectMenu, setCurrentSelectMenu] = useState("1");
 
   const onClickMenu = (e) => {
+    console.log("e :>:>:>", e);
     setCurrentSelectMenu(e.key);
-    navigate(e.path);
+    navigate(get(e, "item.props.path"));
   };
 
   useEffect(() => {
@@ -60,18 +61,18 @@ const MenuItems = [
     key: "2",
     label: "Shop",
     icon: <ShoppingOutlined />,
-    path: "/shop",
+    path: "/products",
   },
   {
     key: "3",
     label: "Search",
     icon: <SearchOutlined />,
-    path: "/about",
+    path: "/home",
   },
   {
     key: "4",
     label: "Account",
     icon: <UserOutlined />,
-    path: "/contact",
+    path: "/dashboard/profile",
   },
 ];

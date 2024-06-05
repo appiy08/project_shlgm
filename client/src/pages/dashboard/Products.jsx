@@ -15,7 +15,7 @@ import ProductCard from "../../Components/Dashboard/Pages/ProductCard";
 import { productsGet } from "../../lib/actions/product";
 import LuxuryGoodsCategoriesList from "../../lib/data/LuxuryGoodsCategoriesList.json";
 import { get, isEmpty } from "lodash";
-// End Imports
+// End Imports 
 const { Title, Text } = Typography;
 
 const Products = () => {
@@ -24,7 +24,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [productsToDisplay, setProductsToDisplay] = useState(products);
+  const [productsToDisplay, setProductsToDisplay] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
@@ -38,11 +38,7 @@ const Products = () => {
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
-    if (value === "all") {
-      handleGetProducts();
-    } else {
-      handleGetProducts({ category: value });
-    }
+    handleGetProducts({ category: value });
   };
 
   const handlePageChange = (page, pageSize) => {
@@ -50,19 +46,17 @@ const Products = () => {
     setPageSize(pageSize);
   };
 
-  const filteredProducts = productsToDisplay.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleGetProducts = async (params) => {
+  const handleGetProducts = async (params = {}) => {
     try {
       setFetchLoading(true);
       const response = await productsGet(params);
 
       if (get(response, "status", "0") === 200) {
-        setProducts(get(response, "data", ""));
-        setFetchLoading(false);
+        const productsData = get(response, "data", []);
+        setProducts(productsData);
+        setProductsToDisplay(productsData);
       }
+      setFetchLoading(false);
     } catch (error) {
       console.log("error :>", error);
       setFetchLoading(false);
@@ -70,9 +64,15 @@ const Products = () => {
   };
 
   useEffect(() => {
-    handleGetProducts({category:selectedCategory});
-    return () => {};
+    handleGetProducts({ category: selectedCategory });
   }, [selectedCategory]);
+
+  useEffect(() => {
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setProductsToDisplay(filteredProducts);
+  }, [searchQuery, products]);
 
   return (
     <Card className="products-page">
@@ -116,7 +116,6 @@ const Products = () => {
                 onChange={handleCategoryChange}
                 className="products-categories-box"
               />
-              ;
             </Col>
           </Row>
         </Col>
@@ -126,8 +125,8 @@ const Products = () => {
               <Col span={24}>
                 <Spin />
               </Col>
-            ) : !isEmpty(products) ? (
-              filteredProducts
+            ) : !isEmpty(productsToDisplay) ? (
+              productsToDisplay
                 .slice(
                   (currentPage - 1) * pageSize,
                   (currentPage - 1) * pageSize + pageSize
@@ -137,8 +136,8 @@ const Products = () => {
                     key={product.id}
                     xs={{ span: 24 }}
                     md={{ span: 12 }}
-                    lg={{ span: 4 }}
-                    xl={{ span: 3 }}
+                    lg={{ span: 8 }}
+                    xxl={{ span: 6 }}
                   >
                     <ProductCard product={product} />
                   </Col>
@@ -154,9 +153,9 @@ const Products = () => {
           <Pagination
             current={currentPage}
             onChange={handlePageChange}
-            total={pageSize}
+            total={productsToDisplay.length}
+            pageSize={pageSize}
           />
-          ;
         </Col>
       </Row>
     </Card>

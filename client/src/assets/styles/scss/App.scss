@@ -89,18 +89,28 @@ body {
         .app-bottom-navigation {
             display: block;
             padding: 0;
-            .ant-menu-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 8px 1rem;
-                .ant-menu-item-icon {
-                    font-size: 20px;
+            position: sticky;
+            bottom: 0;
+            .ant-menu {
+                justify-content: space-evenly;
+                &::after,
+                &::before {
+                    display: unset;
+                    content: none;
                 }
-                .ant-menu-title-content {
-                    margin: 0;
-                    line-height: 28px;
+                .ant-menu-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px 1rem;
+                    .ant-menu-item-icon {
+                        font-size: 20px;
+                    }
+                    .ant-menu-title-content {
+                        margin: 0;
+                        line-height: 28px;
+                    }
                 }
             }
         }
@@ -338,8 +348,14 @@ body {
             }
         }
     }
-    .products-categories-box{
-        .ant-segmented-group{
+    .product-card {
+        .ant-card-meta-title {
+            text-overflow: unset;
+            white-space: unset;
+        }
+    }
+    .products-categories-box {
+        .ant-segmented-group {
             flex-wrap: wrap;
         }
     }
@@ -349,21 +365,32 @@ body {
         .product-images {
             display: flex;
             overflow-x: auto;
-            margin-top: 10px;
+            margin-top: 0.625rem;
         }
 
         .product-image-thumb {
-            margin-right: 10px;
+            margin-right: 0.625rem;
         }
 
         .product-size-selection {
-            margin-bottom: 10px;
+            margin-bottom: 0.625rem;
         }
 
         .product-quantity-selection {
-            margin-bottom: 20px;
+            margin-bottom: 0.625rem;
         }
-
+        .product-gender {
+            margin-bottom: 0.625rem;
+        }
+        .product-brand {
+            margin-bottom: 0.625rem;
+        }
+        .product-condition {
+            margin-bottom: 0.625rem;
+        }
+        .product-in-stock {
+            margin-bottom: 2rem;
+        }
         .product-actions {
             display: flex;
             justify-content: space-between;
@@ -384,7 +411,11 @@ body {
     }
     @media (min-width: 768px) {
         .app-layout {
-            .header-navigation-menu,
+            .app-header {
+                .header-navigation-menu {
+                    display: block;
+                }
+            }
             .app-footer {
                 display: block;
             }

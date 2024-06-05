@@ -73,13 +73,12 @@ const ProductsPage = () => {
     }
   };
 
-  const indexOfLastProduct =
-    (currentPage - 1) * productsPerPage + productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  // const indexOfLastProduct = (currentPage - 1) * productsPerPage + productsPerPage;
+  // const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  // const currentProducts = filteredProducts.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -160,7 +159,6 @@ const ProductsPage = () => {
               </Col>
             ) : (
               map(filteredProducts, (data, index) => {
-                console.log("Rendering product card for:", data);
                 return (
                   <Col
                     key={get(data, "_id", index)}

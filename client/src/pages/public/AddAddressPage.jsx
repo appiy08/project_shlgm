@@ -1,5 +1,4 @@
-import React from 'eact';
-import { Form, Input, Button, Typography, Row, Col, Card } from 'antd';
+import { Form, Input, Button, Row, Col, Card } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 const AddAddressPage = () => {

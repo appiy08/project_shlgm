@@ -21,20 +21,24 @@ const createProduct = async (req, res) => {
 };
 const getProducts = async (req, res) => {
   const { category, brand } = req.query;
+  const filter = {};
+
+  if (category) {
+    filter.category = category;
+  }
+
+  if (brand) {
+    filter.brand = brand;
+  }
+
+  if (category && brand) {
+    filter.category = category;
+    filter.brand = brand;
+  }
 
   try {
-    let filter = {};
-    if (category) {
-      filter.category = category;
-    } else if (brand) {
-      filter.brand = brand;
-    } else if (category && brand) {
-      filter = { category: category, brand: brand };
-    } else {
-      filter = {};
-    }
-
     const products = await Product.find(filter);
+
     res.status(200).json({
       status: 200,
       message: "Product get successfully",

@@ -1,4 +1,3 @@
-import React from 'eact';
 import { Row, Col, Card, Button, Typography } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 

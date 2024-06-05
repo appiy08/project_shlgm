@@ -1,6 +1,7 @@
 import { Button, Card, Image, Rate, Select, Space, Typography } from "antd";
 import { get, map } from "lodash";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 // End Imports
 const { Text } = Typography;
 const { Option } = Select;
@@ -23,9 +24,14 @@ const ProductCard = ({
           alt={get(product, "name", "image")}
         />
       }
+      className="product-card"
     >
       <Card.Meta
-        title={<a href="#">{get(product, "name", "")}</a>}
+        title={
+          <Link to={`/products/${get(product, "_id", "")}`}>
+            {get(product, "name", "")}
+          </Link>
+        }
         description={
           <div>
             <Rate allowHalf defaultValue={get(product, "rating", 0)} disabled />

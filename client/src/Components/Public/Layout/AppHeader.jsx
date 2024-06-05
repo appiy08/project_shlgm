@@ -16,6 +16,7 @@ const AppHeader = () => {
 
   const onClickMenu = (e) => {
     setCurrentSelectMenu(e.key);
+    navigate(get(e,'item.props.path','/home'))
   };
 
   useEffect(() => {
@@ -92,21 +93,21 @@ const MenuItems = [
   {
     key: "1",
     label: "Home",
-    path: "/",
+    path: "/home",
   },
   {
     key: "2",
     label: "Shop",
-    path: "/shop",
+    path: "/products",
   },
   {
     key: "3",
     label: "About",
-    path: "/about",
+    path: "/",
   },
   {
     key: "4",
     label: "Contact",
-    path: "/contact",
+    path: "/",
   },
 ];

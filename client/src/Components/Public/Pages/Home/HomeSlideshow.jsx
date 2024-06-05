@@ -1,8 +1,10 @@
 import { Button, Carousel, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 // End Imports
 const { Title, Text } = Typography;
 
 const HomeSlideshow = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="section-home-banner">
@@ -29,7 +31,11 @@ const HomeSlideshow = () => {
                 <Title level={2} className="hbsc-heading">
                   Summer Collection
                 </Title>
-                <Button type="primary" className="hbsc-btn">
+                <Button
+                  type="primary"
+                  className="hbsc-btn"
+                  onClick={() => navigate("/products")}
+                >
                   Shop Now
                 </Button>
               </div>
@@ -49,7 +55,11 @@ const HomeSlideshow = () => {
                 <Title level={2} className="hbsc-heading">
                   Spring Collection
                 </Title>
-                <Button type="primary" className="hbsc-btn">
+                <Button
+                  type="primary"
+                  className="hbsc-btn"
+                  onClick={() => navigate("/products")}
+                >
                   Shop Now
                 </Button>
               </div>
@@ -63,13 +73,15 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hbsc-subheading">
-                  30% off all order.
-                </Text>
+                <Text className="hbsc-subheading">30% off all order.</Text>
                 <Title level={2} className="hbsc-heading">
                   New Arrivals
                 </Title>
-                <Button type="primary" className="hbsc-btn">
+                <Button
+                  type="primary"
+                  className="hbsc-btn"
+                  onClick={() => navigate("/products")}
+                >
                   Shop Now
                 </Button>
               </div>
@@ -83,13 +95,15 @@ const HomeSlideshow = () => {
                 className="hb-slideshow-bg"
               />
               <div className="hb-slideshow-caption">
-                <Text className="hbsc-subheading">
-                  30% off all order.
-                </Text>
+                <Text className="hbsc-subheading">30% off all order.</Text>
                 <Title level={2} className="hbsc-heading">
                   oh, Hello Neweness!
                 </Title>
-                <Button type="primary" className="hbsc-btn">
+                <Button
+                  type="primary"
+                  className="hbsc-btn"
+                  onClick={() => navigate("/products")}
+                >
                   Shop Now
                 </Button>
               </div>
