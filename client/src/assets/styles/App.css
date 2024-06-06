@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --ant-blue: #1677ff;
-  --ant-purple: #722ED1;
-  --ant-cyan: #13C2C2;
-  --ant-green: #52C41A;
-  --ant-magenta: #EB2F96;
+  --ant-purple: #722ed1;
+  --ant-cyan: #13c2c2;
+  --ant-green: #52c41a;
+  --ant-magenta: #eb2f96;
   --ant-pink: #eb2f96;
-  --ant-red: #F5222D;
-  --ant-orange: #FA8C16;
-  --ant-yellow: #FADB14;
-  --ant-volcano: #FA541C;
-  --ant-geekblue: #2F54EB;
-  --ant-gold: #FAAD14;
-  --ant-lime: #A0D911;
+  --ant-red: #f5222d;
+  --ant-orange: #fa8c16;
+  --ant-yellow: #fadb14;
+  --ant-volcano: #fa541c;
+  --ant-geekblue: #2f54eb;
+  --ant-gold: #faad14;
+  --ant-lime: #a0d911;
   --ant-color-primary: #e09540;
   --ant-color-success: #67d85d;
   --ant-color-warning: #ffc638;
@@ -322,30 +322,22 @@
   --ant-margin-lg: 24px;
   --ant-margin-xl: 32px;
   --ant-margin-xxl: 48px;
-  --ant-box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-secondary: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-secondary: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-tertiary: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
-    0 1px 6px -1px rgba(0, 0, 0, 0.02),
+  --ant-box-shadow-tertiary: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02),
     0 2px 4px 0 rgba(0, 0, 0, 0.02);
   --ant-box-shadow-popover-arrow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-card: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
-    0 3px 6px 0 rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-card: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
     0 5px 12px 4px rgba(0, 0, 0, 0.09);
-  --ant-box-shadow-drawer-right: -6px 0 16px 0 rgba(0, 0, 0, 0.08),
-    -3px 0 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-drawer-right: -6px 0 16px 0 rgba(0, 0, 0, 0.08), -3px 0 6px -4px rgba(0, 0, 0, 0.12),
     -9px 0 28px 8px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-drawer-left: 6px 0 16px 0 rgba(0, 0, 0, 0.08),
-    3px 0 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-drawer-left: 6px 0 16px 0 rgba(0, 0, 0, 0.08), 3px 0 6px -4px rgba(0, 0, 0, 0.12),
     9px 0 28px 8px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-drawer-up: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-drawer-up: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  --ant-box-shadow-drawer-down: 0 -6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 -3px 6px -4px rgba(0, 0, 0, 0.12),
+  --ant-box-shadow-drawer-down: 0 -6px 16px 0 rgba(0, 0, 0, 0.08), 0 -3px 6px -4px rgba(0, 0, 0, 0.12),
     0 -9px 28px 8px rgba(0, 0, 0, 0.05);
   --ant-box-shadow-tabs-overflow-left: inset 10px 0 8px -8px rgba(0, 0, 0, 0.08);
   --ant-box-shadow-tabs-overflow-right: inset -10px 0 8px -8px rgba(0, 0, 0, 0.08);
@@ -721,6 +713,10 @@ body .ant-typography-primary {
   color: var(--ant-color-primary);
   font-weight: 500;
 }
+body .ant-card .ant-card-head .ant-card-head-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+}
 body .ant-carousel .slick-next,
 body .ant-carousel .slick-prev {
   width: 45px;
@@ -744,12 +740,12 @@ body .ant-carousel .slick-prev::before {
 body .ant-carousel .slick-next:hover,
 body .ant-carousel .slick-prev:hover {
   color: var(--ant-color-text-light-solid);
-  background-color: var(--ant-color-primary-active);
+  background-color: var(--ant-color-primary);
 }
 body .ant-carousel .slick-next:hover::before,
 body .ant-carousel .slick-prev:hover::before {
   color: var(--ant-color-text-light-solid);
-  border-color: var(--ant-color-primary-active);
+  border-color: var(--ant-color-primary);
 }
 body .ant-carousel .slick-next {
   right: 2%;
@@ -934,6 +930,21 @@ body .products-categories-box .ant-segmented-group {
 body .product-detail-page {
   padding: 20px;
 }
+body .product-detail-page .ant-carousel .slick-next::before,
+body .product-detail-page .ant-carousel .slick-prev::before {
+  color: #353839;
+  border-color: #353839;
+}
+body .product-detail-page .ant-carousel .slick-next:hover,
+body .product-detail-page .ant-carousel .slick-prev:hover {
+  color: var(--ant-color-text-light-solid);
+  background-color: var(--ant-color-primary);
+}
+body .product-detail-page .ant-carousel .slick-next:hover::before,
+body .product-detail-page .ant-carousel .slick-prev:hover::before {
+  color: var(--ant-color-text-light-solid);
+  border-color: var(--ant-color-primary);
+}
 body .product-detail-page .product-images {
   display: flex;
   overflow-x: auto;
@@ -941,24 +952,6 @@ body .product-detail-page .product-images {
 }
 body .product-detail-page .product-image-thumb {
   margin-right: 0.625rem;
-}
-body .product-detail-page .product-size-selection {
-  margin-bottom: 0.625rem;
-}
-body .product-detail-page .product-quantity-selection {
-  margin-bottom: 0.625rem;
-}
-body .product-detail-page .product-gender {
-  margin-bottom: 0.625rem;
-}
-body .product-detail-page .product-brand {
-  margin-bottom: 0.625rem;
-}
-body .product-detail-page .product-condition {
-  margin-bottom: 0.625rem;
-}
-body .product-detail-page .product-in-stock {
-  margin-bottom: 2rem;
 }
 body .product-detail-page .product-actions {
   display: flex;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 // Dependencies End
-// Code Begin 
+// Code Begin
 const { Schema } = mongoose;
 
 const orderSchema = new Schema({
@@ -13,9 +13,12 @@ const orderSchema = new Schema({
         required: true,
       },
       quantity: { type: Number, required: true },
+      size: { type: String, required: true },
+      color: { type: String, required: true },
     },
   ],
   amount: { type: Number, required: true },
+  address: { type: String, required: true },
   paymentIntentId: { type: String, required: true },
   status: {
     type: String,
@@ -30,4 +33,3 @@ const orderSchema = new Schema({
 const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;
-

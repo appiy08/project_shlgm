@@ -1,10 +1,11 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Flex, Layout, Menu, Tooltip } from "antd";
-import { filter, get } from "lodash";
+import { Badge, Button, Flex, Layout, Menu, Tooltip } from "antd";
+import { filter, get, size } from "lodash";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/auth/useAuthContext";
 import UserMenuDropdown from "./UserMenuDropdown";
+import { useSelector } from "react-redux";
 // End Imports
 const { Header } = Layout;
 
@@ -12,11 +13,12 @@ const AppHeader = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { auth_credentials } = useAuthContext();
+  const cartItems = useSelector((state) => state.cart.data);
   const [currentSelectMenu, setCurrentSelectMenu] = useState("1");
 
   const onClickMenu = (e) => {
     setCurrentSelectMenu(e.key);
-    navigate(get(e,'item.props.path','/home'))
+    navigate(get(e, "item.props.path", "/home"));
   };
 
   useEffect(() => {
@@ -54,11 +56,14 @@ const AppHeader = () => {
           </div>
           <div>
             <Tooltip title="Shopping Cart">
-              <Button
-                type="default"
-                shape="default"
-                icon={<ShoppingCartOutlined />}
-              />
+              <Badge count={size(cartItems)}>
+                <Button
+                  type="default"
+                  shape="default"
+                  icon={<ShoppingCartOutlined />}
+                  onClick={() => navigate("/cart")}
+                />
+              </Badge>
             </Tooltip>
           </div>
           <Flex gap="middle">

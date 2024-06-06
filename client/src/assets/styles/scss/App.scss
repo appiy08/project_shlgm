@@ -130,6 +130,14 @@ body {
         color: var(--ant-color-primary);
         font-weight: 500;
     }
+    .ant-card {
+        .ant-card-head {
+            .ant-card-head-title {
+                font-family: $primary-font-family;
+                font-size: 1.5rem;
+            }
+        }
+    }
     .ant-carousel {
         .slick-next,
         .slick-prev {
@@ -151,10 +159,10 @@ body {
             }
             &:hover {
                 color: var(--ant-color-text-light-solid);
-                background-color: var(--ant-color-primary-active);
+                background-color: var(--ant-color-primary);
                 &::before {
                     color: var(--ant-color-text-light-solid);
-                    border-color: var(--ant-color-primary-active);
+                    border-color: var(--ant-color-primary);
                 }
             }
         }
@@ -361,7 +369,23 @@ body {
     }
     .product-detail-page {
         padding: 20px;
-
+        .ant-carousel {
+            .slick-next,
+            .slick-prev {
+                &::before {
+                    color: #353839;
+                    border-color: #353839;
+                }
+                &:hover {
+                    color: var(--ant-color-text-light-solid);
+                    background-color: var(--ant-color-primary);
+                    &::before {
+                        color: var(--ant-color-text-light-solid);
+                        border-color: var(--ant-color-primary);
+                    }
+                }
+            }
+        }
         .product-images {
             display: flex;
             overflow-x: auto;
@@ -370,26 +394,6 @@ body {
 
         .product-image-thumb {
             margin-right: 0.625rem;
-        }
-
-        .product-size-selection {
-            margin-bottom: 0.625rem;
-        }
-
-        .product-quantity-selection {
-            margin-bottom: 0.625rem;
-        }
-        .product-gender {
-            margin-bottom: 0.625rem;
-        }
-        .product-brand {
-            margin-bottom: 0.625rem;
-        }
-        .product-condition {
-            margin-bottom: 0.625rem;
-        }
-        .product-in-stock {
-            margin-bottom: 2rem;
         }
         .product-actions {
             display: flex;

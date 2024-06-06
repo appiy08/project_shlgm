@@ -11,6 +11,7 @@ const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const uploadRoutes = require('./routes/uploadRoutes');
+const addressRoutes = require('./routes/addressRoutes');
 // Dependencies End
 // Code Begin
 
@@ -34,7 +35,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
-app.use("/api/order", orderRoutes);
+app.use("api/address",addressRoutes)
+app.use("/api/", orderRoutes);
 app.use('/api', uploadRoutes);
 
 

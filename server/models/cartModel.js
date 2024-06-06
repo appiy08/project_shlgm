@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 // Dependencies End
-// Code Begin 
+// Code Begin
 const { Schema } = mongoose;
 
 const cartSchema = new Schema({
@@ -13,6 +13,8 @@ const cartSchema = new Schema({
         required: true,
       },
       quantity: { type: Number, required: true },
+      size: { type: String, required: true },
+      color: { type: String, required: true },
     },
   ],
   createdAt: { type: Date, default: Date.now },

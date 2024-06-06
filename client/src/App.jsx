@@ -20,6 +20,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import ProductCreate from "./pages/dashboard/ProductCreate";
 import Products from "./pages/dashboard/Products";
 import Profile from "./pages/dashboard/Profile";
+import AddressPage from "./pages/public/AddressPage";
 // End Dashboard Page Imports
 // End Page Imports
 
@@ -35,7 +36,8 @@ const App = () => {
         <Route path="products/:productId" element={<ProductDetailPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
-        <Route path="address" element={<AddAddressPage />} />
+        <Route path="address" element={<AddressPage />} />
+        <Route path="address/add" element={<AddAddressPage />} />
         <Route path="payment" element={<PaymentPage />} />
         <Route
           path="login"

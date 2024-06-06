@@ -1,6 +1,8 @@
 import {
+  CheckSquareTwoTone,
+  CloseSquareTwoTone,
   HeartOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -17,35 +19,61 @@ import {
   Select,
   Space,
   Spin,
-  Typography
+  Typography,
 } from "antd";
-import DOMPurify from "dompurify";
+import { grey } from "@ant-design/colors";
 import { get, map, startCase } from "lodash";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import RTEBox from "../../Components/Common/RTEBox";
 import { productGetByID } from "../../lib/actions/product";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import { addToCart } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
 // End Imports
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
-  console.log("locations ::>>", productId);
+  const { auth_credentials } = useAuthContext();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState("L");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const dispatch = useDispatch();
 
   const handleQuantityChange = (value) => {
     setQuantity(value);
   };
 
   const handleSizeChange = (value) => {
-    setSize(value);
+    setSelectedSize(value);
+  };
+
+  const handleColorChange = (value) => {
+    setSelectedColor(value);
   };
 
   const handleAddToCart = () => {
-    message.success(`Added ${quantity} items to cart`);
+    const formData = {
+      userId: get(auth_credentials, "_id", ""),
+      itemId: productId,
+      quantity: quantity,
+      size: selectedSize,
+      color: selectedColor,
+    };
+    dispatch(addToCart(formData))
+      .then((result) => {
+        if (get(result, "payload.status", 0) === 200) {
+          message.success(`Added ${quantity} items to cart`);
+        }
+      })
+      .catch((err) => {
+        message.error(`Something went wrong`);
+        throw err;
+      });
   };
 
   const handleBuyNow = () => {
@@ -59,6 +87,8 @@ const ProductDetailPage = () => {
         const response = await productGetByID(productId);
         const data = get(response, "data", []);
         setProduct(data);
+        setSelectedSize(get(data, "sizes[0]", ""));
+        setSelectedColor(get(data, "colors[0]", ""));
         setFetchLoading(false);
       } catch (error) {
         console.error(error);
@@ -67,7 +97,7 @@ const ProductDetailPage = () => {
     };
     fetchProducts();
   }, [productId]);
-  
+
   return fetchLoading ? (
     <Card>
       <Flex
@@ -93,7 +123,6 @@ const ProductDetailPage = () => {
             slidesToShow={1}
             slidesToScroll={1}
             slidesPerRow={1}
-            className="hb-slideshow"
           >
             {map(get(product, "images", []), (image, index) => (
               <div key={index} style={{ textAlign: "center" }}>
@@ -101,7 +130,6 @@ const ProductDetailPage = () => {
                   width={100}
                   src={image}
                   alt="Product"
-                  preview={false}
                   className="product-image-thumb"
                 />
               </div>
@@ -109,93 +137,147 @@ const ProductDetailPage = () => {
           </Carousel>
         </Col>
         <Col xs={24} md={12}>
-          <Title level={2} className="playfair-display-bold">
-            {get(product, "name", "")}
-          </Title>
-          <Rate defaultValue={get(product, "rating", 0)} disabled />
-          <Text
-            type="secondary"
-            style={{ fontSize: "16px", marginBottom: "10px" }}
-          >
-            {get(product, "reviews", 0)}
-          </Text>
-          <Title level={3} style={{ marginBottom: "10px" }}>
-            Rs. {get(product, "price", 0)}
-          </Title>
-          <Text style={{ fontSize: "16px", marginBottom: "10px" }}>
-            <del>Rs. {get(product, "originalPrice", 0)}</del>
-          </Text>
-          <div className="product-size-selection">
-            <Text style={{ marginBottom: "5px" }}>Size:</Text>
-            <Space size={8}>
-              <Select
-                mode="multiple"
-                defaultValue={get(product, "sizes", "")}
-                onChange={handleSizeChange}
-                value={size}
-                style={{ width: 100 }}
-              >
-                <Option value="xs">XS</Option>
-                <Option value="s">S</Option>
-                <Option value="m">M</Option>
-                <Option value="l">L</Option>
-                <Option value="xl">XL</Option>
-                <Option value="xxl">XXL</Option>
-              </Select>
-            </Space>
-          </div>
-          <div className="product-quantity-selection">
-            <Text style={{ marginBottom: "5px" }}>Quantity:</Text>
-            <InputNumber
-              min={1}
-              max={45}
-              defaultValue={quantity}
-              onChange={handleQuantityChange}
-              style={{ width: 80 }}
-            />
-          </div>
-          <div className="product-gender">
-            <Text style={{ marginRight: "10px" }}>Gender: </Text>
-            <Text>{startCase(get(product, "gender", ""))}</Text>
-          </div>
-          <div className="product-brand">
-            <Text style={{ marginRight: "10px" }}>Brand: </Text>
-            <Text>
-              {startCase(get(product, "brand", ""))}
-            </Text>
-          </div>
-          <div className="product-condition">
-            <Text style={{ marginRight: "10px" }}>Condition: </Text>
-            <Text>
-              {startCase(get(product, "condition", ""))}
-            </Text>
-          </div>
-          <div className="product-brand">
-            <Text style={{ marginRight: "10px" }}>In Stock: </Text>
-            <Text>{startCase(get(product, "inStock", ""))}</Text>
-          </div>
-          <Row gutter={24}>
-            <Col xs={{ span: 24 }} md={{ span: 12 }}>
-              <Button
-                type="primary"
-                size="large"
-                block={true}
-                icon={<ShoppingCartOutlined />}
-                onClick={handleAddToCart}
-              >
-                Add to Cart
-              </Button>
+          <Row gutter={[12, 12]}>
+            <Col span={24}>
+              <Title level={2} className="playfair-display-bold">
+                {get(product, "name", "")}
+              </Title>
             </Col>
-            <Col xs={{ span: 24 }} md={{ span: 12 }}>
-              <Button
-                type="default"
-                size="large"
-                block={true}
-                icon={<HeartOutlined />}
-                onClick={handleBuyNow}
+            <Col span={24}>
+              <Rate defaultValue={get(product, "rating", 0)} disabled />
+              <Text
+                type="secondary"
+                style={{ fontSize: "16px", marginBottom: "10px" }}
               >
-                Buy It Now
-              </Button>
+                {get(product, "reviews", 0)}
+              </Text>
+            </Col>
+            <Col span={24}>
+              <Title level={3} style={{ marginBottom: "10px" }}>
+                Rs. {get(product, "price", 0)}
+              </Title>
+            </Col>
+            <Col span={24}>
+              <Text style={{ fontSize: "16px", marginBottom: "10px" }}>
+                <del>Rs. {get(product, "originalPrice", 0)}</del>
+              </Text>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center">
+                <Text>Color:</Text>
+                <Space>
+                  {map(get(product, "colors", []), (color) => (
+                    <Button
+                      key={color}
+                      onClick={() => handleColorChange(color)}
+                      size="small"
+                      shape="circle"
+                      style={{
+                        width: "1.5rem",
+                        height: "1.5rem",
+                        backgroundColor: color,
+                        border:
+                          selectedColor === color
+                            ? `0.25rem solid ${grey[1]}`
+                            : `0.25rem solid transparent`,
+                      }}
+                    />
+                  ))}
+                </Space>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center">
+                <Text>Size:</Text>
+                <Space size={8}>
+                  <Select
+                    mode="multiple"
+                    defaultValue={get(product, "sizes", "")}
+                    onChange={handleSizeChange}
+                    value={selectedSize}
+                    style={{ width: 100 }}
+                  >
+                    <Option value="xs">XS</Option>
+                    <Option value="s">S</Option>
+                    <Option value="m">M</Option>
+                    <Option value="l">L</Option>
+                    <Option value="xl">XL</Option>
+                    <Option value="xxl">XXL</Option>
+                  </Select>
+                </Space>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex
+                gap={12}
+                align="center"
+                className="product-quantity-selection"
+              >
+                <Text>Quantity:</Text>
+                <InputNumber
+                  min={1}
+                  max={45}
+                  defaultValue={quantity}
+                  onChange={handleQuantityChange}
+                  style={{ width: 80 }}
+                />
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center" className="product-gender">
+                <Text>Gender: </Text>
+                <Text>{startCase(get(product, "gender", ""))}</Text>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center" className="product-brand">
+                <Text>Brand: </Text>
+                <Text>{startCase(get(product, "brand", ""))}</Text>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center" className="product-condition">
+                <Text>Condition: </Text>
+                <Text>{startCase(get(product, "condition", ""))}</Text>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex gap={12} align="center" className="product-brand">
+                <Text>In Stock: </Text>
+                <Text>
+                  {get(product, "inStock", "") ? (
+                    <CheckSquareTwoTone twoToneColor="#49b344" />
+                  ) : (
+                    <CloseSquareTwoTone twoToneColor="#d94f45" />
+                  )}
+                </Text>
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Row gutter={[24, 24]} style={{ marginTop: "1.5rem" }}>
+                <Col xs={{ span: 24 }} md={{ span: 12 }}>
+                  <Button
+                    type="primary"
+                    size="large"
+                    block={true}
+                    icon={<ShoppingCartOutlined />}
+                    onClick={handleAddToCart}
+                  >
+                    Add to Cart
+                  </Button>
+                </Col>
+                <Col xs={{ span: 24 }} md={{ span: 12 }}>
+                  <Button
+                    type="default"
+                    size="large"
+                    block={true}
+                    icon={<HeartOutlined />}
+                    onClick={handleBuyNow}
+                  >
+                    Buy It Now
+                  </Button>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Col>
@@ -207,14 +289,7 @@ const ProductDetailPage = () => {
               Description
             </Title>
           </Divider>
-          <div
-            style={{ padding: "0 4rem" }}
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(
-                get(product, "description", { USE_PROFILES: { html: true } })
-              ),
-            }}
-          />
+          <RTEBox htmlContent={get(product, "description", "")} />
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
