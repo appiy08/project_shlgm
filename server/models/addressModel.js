@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-// End Dependencies
-
+// Dependencies End 
+// Define Address Schema
 const AddressSchema = new mongoose.Schema(
   {
     userId: {
@@ -8,14 +8,17 @@ const AddressSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    address: {
-      name: { type: String, required: true },
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      country: { type: String, required: true },
-      zip: { type: Number, required: true },
-    },
+    addresses: [
+      {
+        name: { type: String, required: true },
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        country: { type: String, required: true },
+        zip: { type: String, required: true }, // Changed to String to accommodate different formats
+        phone: { type: String, required: true }, // Added phone field
+      },
+    ],
   },
   { timestamps: true }
 );

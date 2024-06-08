@@ -1,92 +1,95 @@
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
 const Order = require("../models/orderModel");
 const Cart = require("../models/cartModel");
-const User = require("../models/userModel");
 const Address = require("../models/addressModel");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+// Dependencies End
+// Code Begin
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
-const checkout = async (req, res) => {
-  const { userId } = req.body;
+const createOrder = async (req, res) => {
+  const { userId, addressId } = req.body;
 
   try {
-    // Fetch cart and address
     const cart = await Cart.findOne({ userId });
-    const address = await Address.findOne({ userId });
+    const userAddress = await Address.findOne({ userId });
 
-    // Validate cart and address
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ error: "Cart is empty" });
     }
+
+    if (!userAddress) {
+      return res.status(400).json({ error: "No addresses found for the user" });
+    }
+
+    const address = userAddress.addresses.id(addressId);
 
     if (!address) {
       return res.status(400).json({ error: "Address not found" });
     }
 
-    // Calculate total amount in INR (example: each item costs 1000 INR)
     const totalAmountInINR = cart.items.reduce(
       (total, item) => total + item.quantity * 1000,
       0
     );
-    const totalAmountInPaise = totalAmountInINR * 100; // Convert to paise
+    const totalAmountInPaise = totalAmountInINR * 100;
 
-    // Create a Stripe payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalAmountInPaise, // Amount in paise
-      currency: "inr",
-      metadata: { userId },
-    });
+    const options = {
+      amount: totalAmountInPaise,
+      currency: "INR",
+      receipt: `receipt_order_${Date.now()}`,
+    };
 
-    // Create a new order
-    const order = new Order({
-      userId,
-      items: cart.items,
-      address: address.address,
-      paymentIntentId: paymentIntent.id,
-    });
+    const order = await razorpay.orders.create(options);
 
-    // Save the order and clear the cart
-    await order.save();
+    const newOrder = new Order(
+      {
+        userId,
+        items: cart.items,
+        address: address, // Store the full address object
+        amount: totalAmountInINR,
+        paymentIntentId: order.id,
+      },
+      { addressId: false }
+    );
+
+    await newOrder.save();
     cart.items = [];
     await cart.save();
 
-    // Respond with the payment intent and order details
     res.status(200).json({
       status: 200,
-      message: "Item order successfully",
-      data: { paymentIntent, order },
+      message: "Order created successfully",
+      order,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-webhook = async (req, res) => {
-  const sig = req.headers["stripe-signature"];
-  let event;
+const verifyPayment = async (req, res) => {
+  const { paymentId, orderId, signature } = req.body;
 
-  try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-  } catch (err) {
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+  const generatedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(orderId + "|" + paymentId)
+    .digest("hex");
 
-  if (event.type === "payment_intent.succeeded") {
-    const paymentIntent = event.data.object;
-    const userId = paymentIntent.metadata.userId;
-
+  if (generatedSignature === signature) {
     await Order.findOneAndUpdate(
-      { paymentIntentId: paymentIntent.id },
+      { paymentIntentId: orderId },
       { status: "completed" },
       { new: true }
     );
+    res.status(200).json({ status: "success" });
+  } else {
+    res
+      .status(400)
+      .json({ status: "failure", message: "Payment verification failed" });
   }
-
-  res.status(200).json({
-    received: true,
-  });
 };
 
-module.exports = { checkout, webhook };
+module.exports = { createOrder, verifyPayment };

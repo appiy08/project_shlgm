@@ -6,10 +6,11 @@ const addAddress = async (req, res) => {
 
   try {
     let userAddress = await Address.findOne({ userId });
+
     if (!userAddress) {
-      userAddress = new Address({ userId, address });
+      userAddress = new Address({ userId, addresses: [address] });
     } else {
-      userAddress.address = address;
+      userAddress.addresses.push(address);
     }
 
     await userAddress.save();
@@ -20,30 +21,71 @@ const addAddress = async (req, res) => {
       data: userAddress,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      status: 500,
+      message: error.message,
+    });
   }
 };
 
 // Get Address
 const getAddress = async (req, res) => {
   const { userId } = req.params;
-  console.log(`Fetching address for userId: ${userId}`);
 
   try {
     const address = await Address.findOne({ userId });
 
     if (!address) {
-      return res.status(404).json({ message: "Address not found" });
+      return res.status(404).json({
+        status: 404,
+        message: "Address not found",
+      });
     }
 
     res.status(200).json({
       status: 200,
-      message: "Address retrieved successfully",
+      message: "Addresses retrieved successfully",
       data: address,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      status: 500,
+      message: error.message,
+    });
   }
 };
 
-module.exports = { addAddress, getAddress };
+// Delete Address
+const deleteAddress = async (req, res) => {
+  const { userId, addressId } = req.params;
+
+  try {
+    const userAddress = await Address.findOne({ userId });
+
+    if (!userAddress) {
+      return res.status(404).json({
+        status: 404,
+        message: "Address not found",
+      });
+    }
+
+    userAddress.addresses = userAddress.addresses.filter(
+      (address) => address._id.toString() !== addressId
+    );
+
+    await userAddress.save();
+
+    res.status(200).json({
+      status: 200,
+      message: "Address deleted successfully",
+      data: userAddress,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { addAddress, getAddress, deleteAddress };

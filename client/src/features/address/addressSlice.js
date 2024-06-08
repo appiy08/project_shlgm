@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { get } from "lodash";
-import { addAddressAPI, getAddressAPI } from "../../lib/actions/user";
-
+import { addAddressAPI, getAddressAPI } from "../../lib/actions/address";
+// End Dependencies
 
 export const addAddress = createAsyncThunk("address/addAddress", async (values) => {
   const response = await addAddressAPI(values);
@@ -31,8 +31,7 @@ export const cartSlice = createSlice({
       })
       .addCase(addAddress.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("action :>", action);
-        state.data.push(...get(action, "payload.data", []));
+        state.data.push(...get(action, "payload.data.data.addresses", []));
       })
       .addCase(addAddress.rejected, (state, action) => {
         state.status = "failed";
@@ -43,7 +42,7 @@ export const cartSlice = createSlice({
       })
       .addCase(getAddressData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.data = get(action, "payload.data", []);
+        state.data = get(action, "payload.data.data.addresses", []);
       })
       .addCase(getAddressData.rejected, (state, action) => {
         state.status = "failed";

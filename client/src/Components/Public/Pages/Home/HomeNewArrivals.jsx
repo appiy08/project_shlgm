@@ -67,7 +67,7 @@ const HomeNewArrivals = () => {
                       })}
                       <div className="product-hover-content fade-in">
                         <Popover
-                          content={AddToCartBtnBox}
+                          content={<AddToCartBtnBox productId="" sizes={[]} colors={[]} />}
                           trigger="click"
                           arrow={false}
                         >

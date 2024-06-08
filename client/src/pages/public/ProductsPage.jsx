@@ -16,61 +16,61 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [selectedBrand, setSelectedBrand] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000000]);
   const [showInStockOnly, setShowInStockOnly] = useState(false);
 
   const handleBrandChange = (value) => {
     setSelectedBrand(value);
-    if (value) {
-      setFilteredProducts(
-        products.filter((product) => product.brand === value)
-      );
-    } else {
-      setFilteredProducts(products);
-    }
+    // if (value) {
+    //   setFilteredProducts(
+    //     products.filter((product) => product.brand === value)
+    //   );
+    // } else {
+    //   setFilteredProducts(products);
+    // }
   };
 
   const handleColorChange = (value) => {
     setSelectedColor(value);
-    if (value) {
-      setFilteredProducts(
-        products.filter((product) => product.colors.includes(value))
-      );
-    } else {
-      setFilteredProducts(products);
-    }
+    // if (value) {
+    //   setFilteredProducts(
+    //     products.filter((product) => product.colors.includes(value))
+    //   );
+    // } else {
+    //   setFilteredProducts(products);
+    // }
   };
 
   const handleSizeChange = (value) => {
     setSelectedSize(value);
-    if (value) {
-      setFilteredProducts(
-        products.filter((product) => product.sizes.includes(value))
-      );
-    } else {
-      setFilteredProducts(products);
-    }
+    // if (value) {
+    //   setFilteredProducts(
+    //     products.filter((product) => product.sizes.includes(value))
+    //   );
+    // } else {
+    //   setFilteredProducts(products);
+    // }
   };
 
   const handlePriceChange = (value) => {
     setSelectedPriceRange(value);
-    setFilteredProducts(
-      products.filter(
-        (product) => product.price >= value[0] && product.price <= value[1]
-      )
-    );
+    // setFilteredProducts(
+    //   products.filter(
+    //     (product) => product.price >= value[0] && product.price <= value[1]
+    //   )
+    // );
   };
 
   const handleInStockChange = (e) => {
     setShowInStockOnly(e.target.checked);
-    if (e.target.checked) {
-      setFilteredProducts(products.filter((product) => product.inStock));
-    } else {
-      setFilteredProducts(products);
-    }
+    // if (e.target.checked) {
+    //   setFilteredProducts(products.filter((product) => product.inStock));
+    // } else {
+    //   setFilteredProducts(products);
+    // }
   };
 
   // const indexOfLastProduct = (currentPage - 1) * productsPerPage + productsPerPage;
@@ -108,7 +108,6 @@ const ProductsPage = () => {
   //   });
   //   setFilteredProducts(filteredData);
   // };
-
 
   return (
     <Layout style={{ position: "relative", padding: "1.5rem 0" }}>

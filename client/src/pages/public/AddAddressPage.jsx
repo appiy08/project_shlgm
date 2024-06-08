@@ -1,25 +1,34 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
+import { Button, Card, Col, Form, Input, message, Row, Typography } from "antd";
 import { get } from "lodash";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAddress } from "../../features/address/addressSlice";
 import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import { useNavigate } from "react-router-dom";
 // End Dependencies
 const { Title } = Typography;
 
 const AddAddressPage = () => {
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
   const { auth_credentials } = useAuthContext();
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((state) => state.address);
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     const formData = {
       userId: get(auth_credentials, "_id", ""),
       address: values,
     };
-    console.log(formData);
     // Add address to database or API
     dispatch(addAddress(formData));
+
+    if (status === "succeeded") {
+      message.success("Address add successfully");
+      navigate("/address");
+    } else {
+      message.error(error);
+    }
   };
 
   return (
@@ -35,6 +44,9 @@ const AddAddressPage = () => {
             <Form form={form} layout="vertical" onFinish={handleSubmit}>
               <Form.Item label="Name" name="name">
                 <Input placeholder="Enter your name" />
+              </Form.Item>
+              <Form.Item label="Phone" name="phone">
+                <Input placeholder="Enter your phone number" />
               </Form.Item>
               <Form.Item label="Address" name="address">
                 <Input placeholder="Enter your address" />
@@ -52,13 +64,15 @@ const AddAddressPage = () => {
                 <Input placeholder="Enter your zip" />
               </Form.Item>
               <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  icon={<PlusOutlined />}
-                >
-                  Add Address
-                </Button>
+                <div style={{ marginTop: "1rem" }}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    icon={<PlusOutlined />}
+                  >
+                    Add Address
+                  </Button>
+                </div>
               </Form.Item>
             </Form>
           </Card>

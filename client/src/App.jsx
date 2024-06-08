@@ -1,28 +1,23 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthContext } from "./hooks/auth/useAuthContext";
-// End Imports
-// Begin Public Page Imports
+// End Dependencies
+import DashboardLayout from "./Components/Dashboard/Layout/DashboardLayout";
 import AppLayout from "./Components/Public/Layout/AppLayout";
 import CustomerLogIn from "./pages/auth/CustomerLogIn";
 import CustomerSignUp from "./pages/auth/CustomerSignUp";
-import Home from "./pages/public/Home";
-import ProductDetailPage from "./pages/public/ProductDetail";
-import ProductsPage from "./pages/public/ProductsPage";
-import CartPage from "./pages/public/CartPage";
-import CheckoutPage from "./pages/public/CheckoutPage";
-import AddAddressPage from "./pages/public/AddAddressPage";
-import PaymentPage from "./pages/public/PaymentPage";
-// End Public Page Imports
-// Begin Dashboard Page Imports
-import { get, isEmpty } from "lodash";
-import DashboardLayout from "./Components/Dashboard/Layout/DashboardLayout";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProductCreate from "./pages/dashboard/ProductCreate";
 import Products from "./pages/dashboard/Products";
 import Profile from "./pages/dashboard/Profile";
+import NotFoundPage from "./pages/error/NotFoundPage";
+import AddAddressPage from "./pages/public/AddAddressPage";
 import AddressPage from "./pages/public/AddressPage";
-// End Dashboard Page Imports
-// End Page Imports
+import CartPage from "./pages/public/CartPage";
+import CheckoutPage from "./pages/public/CheckoutPage";
+import Home from "./pages/public/Home";
+import ProductDetailPage from "./pages/public/ProductDetail";
+import ProductsPage from "./pages/public/ProductsPage";
+// End Layout, Pages, Component Imports
 
 const App = () => {
   const { auth_credentials } = useAuthContext();
@@ -38,37 +33,28 @@ const App = () => {
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="address" element={<AddressPage />} />
         <Route path="address/add" element={<AddAddressPage />} />
-        <Route path="payment" element={<PaymentPage />} />
         <Route
           path="login"
           element={
-            isEmpty(get(auth_credentials, "_id", "")) ? (
-              <CustomerLogIn />
-            ) : (
-              <Navigate to="/dashboard" />
-            )
+            !auth_credentials ? <CustomerLogIn /> : <Navigate to="/dashboard" />
           }
         />
-
         <Route
           path="signup"
           element={
-            isEmpty(get(auth_credentials, "_id", "")) ? (
+            !auth_credentials ? (
               <CustomerSignUp />
             ) : (
               <Navigate to="/dashboard" />
             )
           }
         />
+        <Route path="404" element={<NotFoundPage />} />
       </Route>
       <Route
         path="dashboard"
         element={
-          !isEmpty(get(auth_credentials, "_id", "")) ? (
-            <DashboardLayout />
-          ) : (
-            <Navigate to="/login" />
-          )
+          auth_credentials ? <DashboardLayout /> : <Navigate to="/login" />
         }
       >
         <Route index element={<Dashboard />} />
@@ -76,6 +62,7 @@ const App = () => {
         <Route path="products/create" element={<ProductCreate />} />
         <Route path="profile" element={<Profile />} />
       </Route>
+      <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
   );
 };

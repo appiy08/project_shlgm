@@ -46,7 +46,7 @@ const formItemLayout = {
 
 const ProductCreate = () => {
   const [form] = Form.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { auth_credentials } = useAuthContext();
 
   const [images, setImages] = useState([]);
@@ -120,11 +120,11 @@ const ProductCreate = () => {
         message.success(
           get(response, "message", "Product created successfully")
         );
-        navigate('/dashboard/products')
+        navigate("/dashboard/products");
       }
     } catch (error) {
       console.error(error);
-      message.error('Something went wrong')
+      message.error("Something went wrong");
     }
   };
 
@@ -215,7 +215,7 @@ const ProductCreate = () => {
                 >
                   {map(ColorsList, (data, index) => {
                     return (
-                      <Option key={index} value={get(data, "value", "")}>
+                      <Option key={index} value={get(data, "label", "")}>
                         <Flex justify="space-between" gap={8}>
                           <Text>{get(data, "label", "")}</Text>
                           <Space />
@@ -350,7 +350,6 @@ const ProductCreate = () => {
                 <Checkbox />
               </Form.Item>
 
-              
               <Form.Item
                 label="Stock"
                 name="stock"

@@ -18,7 +18,7 @@ const orderSchema = new Schema({
     },
   ],
   amount: { type: Number, required: true },
-  address: { type: String, required: true },
+  addressId: { type: mongoose.Schema.Types.ObjectId, ref: "Address", required: true },
   paymentIntentId: { type: String, required: true },
   status: {
     type: String,
@@ -28,6 +28,11 @@ const orderSchema = new Schema({
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+});
+
+orderSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
 });
 
 const Order = mongoose.model("Order", orderSchema);

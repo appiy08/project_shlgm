@@ -1,3 +1,4 @@
+import { grey } from "@ant-design/colors";
 import {
   CheckSquareTwoTone,
   CloseSquareTwoTone,
@@ -21,21 +22,21 @@ import {
   Spin,
   Typography,
 } from "antd";
-import { grey } from "@ant-design/colors";
 import { get, map, startCase } from "lodash";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import RTEBox from "../../Components/Common/RTEBox";
-import { productGetByID } from "../../lib/actions/product";
-import { useAuthContext } from "../../hooks/auth/useAuthContext";
-import { addToCart } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import RTEBox from "../../Components/Common/RTEBox";
+import { addToCart } from "../../features/cart/cartSlice";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import { productGetByID } from "../../lib/actions/product";
 // End Imports
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
+  const navigate = useNavigate()
   const { auth_credentials } = useAuthContext();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [product, setProduct] = useState([]);
@@ -57,23 +58,27 @@ const ProductDetailPage = () => {
   };
 
   const handleAddToCart = () => {
-    const formData = {
-      userId: get(auth_credentials, "_id", ""),
-      itemId: productId,
-      quantity: quantity,
-      size: selectedSize,
-      color: selectedColor,
-    };
-    dispatch(addToCart(formData))
-      .then((result) => {
-        if (get(result, "payload.status", 0) === 200) {
-          message.success(`Added ${quantity} items to cart`);
-        }
-      })
-      .catch((err) => {
-        message.error(`Something went wrong`);
-        throw err;
-      });
+    if (get(auth_credentials, "_id", "")) {
+      const formData = {
+        userId: get(auth_credentials, "_id", ""),
+        itemId: productId,
+        quantity: quantity,
+        size: selectedSize,
+        color: selectedColor,
+      };
+      dispatch(addToCart(formData))
+        .then((result) => {
+          if (get(result, "payload.status", 0) === 200) {
+            message.success(`Added ${quantity} items to cart`);
+          }
+        })
+        .catch((err) => {
+          message.error(`Something went wrong`);
+          throw err;
+        });
+    } else {
+      navigate("/login");
+    }
   };
 
   const handleBuyNow = () => {

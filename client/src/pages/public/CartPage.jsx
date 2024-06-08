@@ -13,7 +13,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const { auth_credentials } = useAuthContext();
   const cartItems = useSelector((state) => state.cart.data);
-  const totalPrice = cartItems.reduce((total, item) => {
+  const subtotal = cartItems.reduce((total, item) => {
     return total + get(item, "itemId.price", 0) * get(item, "quantity", 0);
   }, 0);
 
@@ -64,7 +64,7 @@ const CartPage = () => {
               <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 6 }}>
                 <Flex gap={12}>
                   <Typography.Text strong>Subtotal:</Typography.Text>
-                  <Typography.Text>₹{totalPrice}</Typography.Text>
+                  <Typography.Text>₹{subtotal}</Typography.Text>
                 </Flex>
               </Col>
             </Row>
@@ -73,7 +73,14 @@ const CartPage = () => {
                 <Button
                   type="primary"
                   block
-                  onClick={() => navigate("/address")}
+                  onClick={() =>
+                    navigate("/address", {
+                      state: {
+                        userId: get(auth_credentials, "_id", ""),
+                        subtotal: subtotal,
+                      },
+                    })
+                  }
                 >
                   Proceed to Checkout
                 </Button>
