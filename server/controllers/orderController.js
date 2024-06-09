@@ -2,7 +2,7 @@ const Razorpay = require("razorpay");
 const crypto = require("crypto");
 const Order = require("../models/orderModel");
 const Cart = require("../models/cartModel");
-const Address = require("../models/addressModel");
+const User = require("../models/userModel");
 // Dependencies End
 // Code Begin
 const razorpay = new Razorpay({
@@ -15,12 +15,12 @@ const createOrder = async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ userId });
-    const userAddress = await Address.findOne({ userId });
+    const userAddress = await User.findOne({ _id: userId });
 
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ error: "Cart is empty" });
     }
-
+  
     if (!userAddress) {
       return res.status(400).json({ error: "No addresses found for the user" });
     }

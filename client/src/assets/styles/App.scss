@@ -41,6 +41,7 @@ body {
         vertical-align: middle;
     }
     .app-layout {
+        position: relative;
         .brand-logo {
             display: block;
             text-align: start;
@@ -89,8 +90,10 @@ body {
         .app-bottom-navigation {
             display: block;
             padding: 0;
-            position: sticky;
+            width: 100%;
+            position: fixed;
             bottom: 0;
+            z-index: 9999;
             .ant-menu {
                 justify-content: space-evenly;
                 &::after,
@@ -411,6 +414,15 @@ body {
     .product-description-editor {
         .ql-editor {
             min-height: 10rem;
+        }
+    }
+    .cart-item-card{
+        position: relative;
+        .cart-item-remove-btn{
+            position: absolute;
+            top: 2%;
+            right: 1%;
+            z-index: inherit;
         }
     }
     @media (min-width: 768px) {

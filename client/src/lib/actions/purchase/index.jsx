@@ -30,6 +30,21 @@ export const getCartAPI = ({ userId }) => {
       });
   });
 };
+export const removeCartItemAPI = (values) => {
+  return new Promise((resolve, reject) => {
+    AxiosDefault({
+      method: "POST",
+      url: `cart/remove_item`,
+      data:values
+    })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 export const orderCheckoutAPI = (values) => {
   return new Promise((resolve, reject) => {

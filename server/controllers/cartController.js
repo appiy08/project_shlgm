@@ -1,5 +1,8 @@
 const Cart = require("../models/cartModel");
-
+const { get, findIndex } = require("lodash");
+// Dependencies End
+// Code Begin
+// Items Added To Cart
 const addToCart = async (req, res) => {
   const { userId, itemId, quantity, size, color } = req.body;
 
@@ -33,10 +36,9 @@ const addToCart = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+// Get Cart Items
 const getCart = async (req, res) => {
   const { userId } = req.params;
-  console.log(`Fetching cart for userId: ${userId}`);
 
   try {
     const cart = await Cart.findOne({ userId }).populate("items.itemId");
@@ -55,4 +57,36 @@ const getCart = async (req, res) => {
   }
 };
 
-module.exports = { addToCart, getCart };
+// Remove Item from Cart
+const removeCartItem = async (req, res) => {
+  const { userId, itemId } = req.body;
+
+  try {
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    const itemIndex = findIndex(get(cart, "items", []), function (o) {
+      return o.itemId == itemId;
+    });
+    console.log("itemIndex <<<>>>", itemIndex);
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: "Item not found in cart" });
+    }
+
+    cart.items.splice(itemIndex, 1); // Remove the item from the array
+    await cart.save();
+
+    res.status(200).json({
+      status: 200,
+      message: "Item removed successfully",
+      data: cart,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { addToCart, getCart, removeCartItem };

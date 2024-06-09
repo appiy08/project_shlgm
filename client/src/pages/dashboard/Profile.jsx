@@ -10,27 +10,18 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Descriptions,
-  Radio,
-  Row
-} from "antd";
+import { Avatar, Button, Card, Col, Descriptions, Radio, Row } from "antd";
 
-import {
-  FacebookOutlined,
-  InstagramOutlined,
-  TwitterOutlined,
-} from "@ant-design/icons";
 
+import { get } from "lodash";
+import { useSelector } from "react-redux";
 import { PencilIcon } from "../../assets/dashboard/icons";
 import BgProfile from "../../assets/dashboard/images/bg-profile.jpg";
 import profilavatar from "../../assets/dashboard/images/face-1.jpg";
+// Dependencies End
 
 const Profile = () => {
+  const user = useSelector((state) => get(state, "user.data", {}));
   return (
     <>
       <div
@@ -46,10 +37,8 @@ const Profile = () => {
             <Col span={24} md={12} className="col-info">
               <Avatar.Group>
                 <Avatar size={74} shape="square" src={profilavatar} />
-
                 <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Sarah Jacob</h4>
-                  <p>CEO / Co-Founder</p>
+                  <h4 className="font-semibold m-0">{get(user, "name", "")}</h4>
                 </div>
               </Avatar.Group>
             </Col>
@@ -78,34 +67,20 @@ const Profile = () => {
             className="header-solid h-full card-profile-information"
             extra={
               <Button type="link">
-                <PencilIcon/>
+                <PencilIcon />
               </Button>
             }
             styles={{ body: { paddingTop: 0, paddingBottom: 16 } }}
           >
             <Descriptions>
               <Descriptions.Item label="Full Name" span={3}>
-                Sarah Emily Jacob
+                {get(user, "name", "")}
               </Descriptions.Item>
               <Descriptions.Item label="Mobile" span={3}>
-                (44) 123 1234 123
+                {get(user, "phone", "")}
               </Descriptions.Item>
               <Descriptions.Item label="Email" span={3}>
-                sarahjacob@mail.com
-              </Descriptions.Item>
-              <Descriptions.Item label="Location" span={3}>
-                USA
-              </Descriptions.Item>
-              <Descriptions.Item label="Social" span={3}>
-                <a href="#pablo" className="mx-5 px-5">
-                  {<TwitterOutlined />}
-                </a>
-                <a href="#pablo" className="mx-5 px-5">
-                  {<FacebookOutlined style={{ color: "#344e86" }} />}
-                </a>
-                <a href="#pablo" className="mx-5 px-5">
-                  {<InstagramOutlined style={{ color: "#e1306c" }} />}
-                </a>
+                {get(user, "email", "")}
               </Descriptions.Item>
             </Descriptions>
           </Card>

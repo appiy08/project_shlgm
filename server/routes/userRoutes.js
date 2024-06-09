@@ -1,10 +1,22 @@
 const express = require("express");
-// Controller Functions
-const { getUser } = require("../controllers/userController");
-// Dependencies End
-// Code Begin
+const {
+  getUser,
+  updateUser,
+  deleteUser,
+  addAddress,
+  getAddress,
+  deleteAddress,
+  setDefaultAddress,
+} = require("../controllers/userController");
+// Dependencies End 
 const router = express.Router();
 
-router.post("/user", getUser);
+router.get("/:userId", getUser);
+router.put("/:userId", updateUser);
+router.delete("/:userId", deleteUser);
+router.post("/address", addAddress);
+router.get("/address/:userId", getAddress);
+router.delete("/address/:userId/:addressId", deleteAddress);
+router.post("/default-address", setDefaultAddress);
 
 module.exports = router;

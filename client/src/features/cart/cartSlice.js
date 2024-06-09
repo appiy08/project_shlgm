@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { get } from "lodash";
-import { addToCartAPI, getCartAPI } from "../../lib/actions/purchase";
+import {
+  addToCartAPI,
+  getCartAPI,
+  removeCartItemAPI,
+} from "../../lib/actions/purchase";
 
 export const addToCart = createAsyncThunk("cart/addToCart", async (values) => {
   const response = await addToCartAPI(values);
@@ -11,6 +15,14 @@ export const getCartData = createAsyncThunk(
   "cart/getCartData",
   async (userId) => {
     const response = await getCartAPI(userId);
+    return response;
+  }
+);
+
+export const removeCartItem = createAsyncThunk(
+  "cart/removeCartItem",
+  async (userId) => {
+    const response = await removeCartItemAPI(userId);
     return response;
   }
 );
@@ -30,7 +42,6 @@ export const cartSlice = createSlice({
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("action :>", action);
         state.data.push(...get(action, "payload.data.items", []));
       })
       .addCase(addToCart.rejected, (state, action) => {
@@ -45,6 +56,17 @@ export const cartSlice = createSlice({
         state.data = get(action, "payload.data.items", []);
       })
       .addCase(getCartData.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(removeCartItem.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(removeCartItem.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = get(action, "payload.data.items", []);
+      })
+      .addCase(removeCartItem.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

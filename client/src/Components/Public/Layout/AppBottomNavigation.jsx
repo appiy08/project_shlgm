@@ -17,7 +17,6 @@ const AppBottomNavigation = () => {
   const [currentSelectMenu, setCurrentSelectMenu] = useState("1");
 
   const onClickMenu = (e) => {
-    console.log("e :>:>:>", e);
     setCurrentSelectMenu(e.key);
     navigate(get(e, "item.props.path"));
   };

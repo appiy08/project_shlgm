@@ -1,4 +1,9 @@
+import { get } from "lodash";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { getCartData } from "./features/cart/cartSlice";
+import { getUserData } from "./features/user/userSlice";
 import { useAuthContext } from "./hooks/auth/useAuthContext";
 // End Dependencies
 import DashboardLayout from "./Components/Dashboard/Layout/DashboardLayout";
@@ -21,6 +26,15 @@ import ProductsPage from "./pages/public/ProductsPage";
 
 const App = () => {
   const { auth_credentials } = useAuthContext();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (get(auth_credentials, "_id", "")) {
+      dispatch(getCartData({ userId: get(auth_credentials, "_id", "") }));
+      dispatch(getUserData({ userId: get(auth_credentials, "_id", "") }));
+      dispatch(getUserData({ userId: get(auth_credentials, "_id", "") }));
+    }
+  }, [auth_credentials, dispatch]);
 
   return (
     <Routes>
@@ -51,17 +65,41 @@ const App = () => {
         />
         <Route path="404" element={<NotFoundPage />} />
       </Route>
-      <Route
-        path="dashboard"
-        element={
-          auth_credentials ? <DashboardLayout /> : <Navigate to="/login" />
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="products" element={<Products />} />
-        <Route path="products/create" element={<ProductCreate />} />
-        <Route path="profile" element={<Profile />} />
-      </Route>
+      {get(auth_credentials, "role", "") === "customer" ? (
+        <Route
+          path="dashboard"
+          element={
+            auth_credentials ? <DashboardLayout /> : <Navigate to="/login" />
+          }
+        >
+          <Route index element={<Navigate to="/dashboard/profile" />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+      ) : get(auth_credentials, "role", "") === "seller" ? (
+        <Route
+          path="dashboard"
+          element={
+            auth_credentials ? <DashboardLayout /> : <Navigate to="/login" />
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/create" element={<ProductCreate />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+      ) : get(auth_credentials, "role", "") === "admin" ? (
+        <Route
+          path="dashboard"
+          element={
+            auth_credentials ? <DashboardLayout /> : <Navigate to="/login" />
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/create" element={<ProductCreate />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+      ) : null}
       <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
   );

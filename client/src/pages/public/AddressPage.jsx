@@ -1,9 +1,12 @@
-import { Button, Card, Col, Radio, Row, Typography } from "antd";
+import { Button, Card, Col, message, Radio, Row, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthContext } from "../../hooks/auth/useAuthContext";
-import { getAddressData } from "../../features/address/addressSlice";
+import {
+  getAddressData,
+  setDefaultAddress,
+} from "../../features/address/addressSlice";
 import { get, map } from "lodash";
 // End Dependencies
 const { Title, Text } = Typography;
@@ -13,11 +16,21 @@ const AddressPage = () => {
   const { state } = useLocation();
   const { auth_credentials } = useAuthContext();
   const dispatch = useDispatch();
-  const addresses = useSelector((state) => state.address);
-  const [selectedAddress, setSelectedAddress] = useState({});
+  const addresses = useSelector((state) => get(state, "address.data", {}));
+  const user = useSelector((state) => get(state, "user.data", {}));
+  const [selectedAddress, setSelectedAddress] = useState(
+    get(user, "defaultAddress", "")
+  );
 
   const handleSelectAddress = (e) => {
     setSelectedAddress(get(e, "target.value"));
+    dispatch(
+      setDefaultAddress({
+        userId: get(auth_credentials, "_id", ""),
+        addressId: get(e, "target.value", ""),
+      })
+    );
+    message.success("Default address selected");
   };
 
   useEffect(() => {
@@ -59,10 +72,11 @@ const AddressPage = () => {
             name="radiogroup"
             value={selectedAddress}
             onChange={handleSelectAddress}
+            style={{ width: "100%" }}
           >
             <Row gutter={[12, 12]}>
-              {map(get(addresses, "data", []), (data, index) => (
-                <Col>
+              {map(addresses, (data, index) => (
+                <Col xs={24} md={12} lg={8} xxl={6}>
                   <Card
                     key={index}
                     title={get(data, "name", "")}
@@ -91,7 +105,13 @@ const AddressPage = () => {
           </Radio.Group>
         </Col>
         <Col span={24}>
-          <div style={{ textAlign: "center", marginTop: "1rem",marginBottom:'2rem' }}>
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "1rem",
+              marginBottom: "2rem",
+            }}
+          >
             <Button
               type="primary"
               onClick={() =>

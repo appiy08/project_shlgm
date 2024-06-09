@@ -2,9 +2,19 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const { get } = require("lodash");
+
 // Dependencies End
-// Code Begin
 const { Schema } = mongoose;
+
+const AddressSchema = new Schema({
+  name: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  country: { type: String, required: true },
+  zip: { type: String, required: true },
+  phone: { type: String, required: true },
+});
 
 const userSchema = new Schema({
   name: { type: String, required: true },
@@ -17,6 +27,8 @@ const userSchema = new Schema({
     default: "customer",
   },
   agreement: { type: Boolean, required: true },
+  addresses: [AddressSchema],
+  defaultAddress: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

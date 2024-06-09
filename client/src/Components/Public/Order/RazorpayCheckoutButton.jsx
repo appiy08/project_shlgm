@@ -1,21 +1,43 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { verifyPayment } from "../../../features/order/orderSlice";
-// Dependencies End 
-// Code Begin 
+import { getCartData } from "../../../features/cart/cartSlice";
+import { useAuthContext } from "../../../hooks/auth/useAuthContext";
+import { filter, get, toString } from "lodash";
+import { useEffect, useState } from "react";
+// Dependencies End
+// Code Begin
 const RazorpayCheckoutButton = ({ userId, addressId }) => {
   const dispatch = useDispatch();
   const orderState = useSelector((state) => state.order);
+  const addresses = useSelector((state) => get(state, "address.data", []));
+  const { auth_credentials } = useAuthContext();
+  const [address, setAddress] = useState({});
+
+  useEffect(() => {
+    function getSelectedAddress() {
+      filter(addresses, (data) => {
+        if (get(data, "_id", "") === addressId) {
+          setAddress(data);
+          return data;
+        }
+      });
+    }
+    getSelectedAddress();
+  }, [addressId, addresses]);
 
   const handlePayment = async () => {
     try {
       // Fetch order details from the server
-      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}order/create`, {
-        userId,
-        addressId,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}order/create`,
+        {
+          userId,
+          addressId,
+        }
+      );
 
       if (data.error) {
         alert(data.error);
@@ -34,7 +56,7 @@ const RazorpayCheckoutButton = ({ userId, addressId }) => {
           try {
             // Send payment response to the server for verification
             const verifyResponse = await axios.post(
-              `${import.meta.env.VITE_BASE_URL}/verify-payment`,
+              `${import.meta.env.VITE_BASE_URL}order/verify-payment`,
               {
                 paymentId: response.razorpay_payment_id,
                 orderId: response.razorpay_order_id,
@@ -43,26 +65,27 @@ const RazorpayCheckoutButton = ({ userId, addressId }) => {
             );
 
             if (verifyResponse.data.status === "success") {
-              alert("Payment successful");
+              message.success("Payment successful");
               dispatch(verifyPayment(verifyResponse.data));
+              dispatch(getCartData({ userId }));
             } else {
-              alert("Payment verification failed");
+              message.error("Payment verification failed");
             }
           } catch (error) {
             console.error("Payment verification error:", error);
-            alert("Payment verification failed");
+            message.error("Payment verification failed");
           }
         },
         prefill: {
-          name: "Customer Name",
-          email: "customer@example.com",
-          contact: "9999999999",
+          name: get(auth_credentials, "name", ""),
+          email: get(auth_credentials),
+          contact: get(address, "phone", ""),
         },
         notes: {
-          address: "Customer Address",
+          address: toString(address),
         },
         theme: {
-          color: "#F37254",
+          color: "#E09540",
         },
       };
 
@@ -70,12 +93,18 @@ const RazorpayCheckoutButton = ({ userId, addressId }) => {
       rzp1.open();
     } catch (error) {
       console.error("Error creating order:", error);
-      alert("Error creating order");
+      message.error("Error creating order");
     }
   };
 
   return (
-    <Button type="primary" size="large" block onClick={handlePayment} loading={orderState.loading}>
+    <Button
+      type="primary"
+      size="large"
+      block
+      onClick={handlePayment}
+      loading={orderState.loading}
+    >
       Pay with Razorpay
     </Button>
   );
