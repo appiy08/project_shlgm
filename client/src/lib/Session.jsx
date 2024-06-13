@@ -35,16 +35,17 @@ export const getCookie = async (name) => {
   const session = cookies.get(name);
   if (!session) {
     return null;
-  } else {
-    try {
-      const result = await decrypt(session);
-      return get(result, "data", {});
-    } catch (err) {
-      console.error("Error decrypting session:", err);
-      throw err;
-    }
+  }
+
+  try {
+    const result = await decrypt(session);
+    return get(result, "data", {}); // Assuming get is a function to retrieve nested properties
+  } catch (err) {
+    console.error("Error decrypting session:", err);
+    throw err; // Rethrow the error to ensure the calling code can handle it
   }
 };
+
 
 export const updateSession = (name, request, expireTime) => {
   return new Promise((resolve, reject) => {

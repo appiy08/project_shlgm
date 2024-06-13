@@ -1,21 +1,22 @@
 import axios from "axios";
 import { get } from "lodash";
 import { Cookies } from "react-cookie";
+import { getCookie } from "../lib/Session";
 // End Imports
 
 const serverBaseUrl = import.meta.env.VITE_BASE_URL;
 
 const cookies = new Cookies();
 
-const auth_credentials = cookies.get("auth_credentials");
+const createAxiosInstance = async () => {
+  const auth_credentials = await getCookie('auth_credentials');
 
-const useAxiosDefault = () => {
   const handleLogout = () => {
     cookies.remove("auth_credentials");
     window.location.replace("/");
   };
 
-  const AxiosDefault = axios.create({
+  const axiosInstance = axios.create({
     baseURL: serverBaseUrl,
     timeout: 10000,
     headers: {
@@ -24,9 +25,9 @@ const useAxiosDefault = () => {
     },
   });
 
-  AxiosDefault.interceptors.request.use(
+  axiosInstance.interceptors.request.use(
     (config) => {
-      const authToken = `Bearer ${get(auth_credentials, "_id", "")}`;
+      const authToken = `Bearer ${get(auth_credentials, "token", "")}`;
       if (authToken) {
         config.headers.Authorization = authToken;
       }
@@ -37,7 +38,7 @@ const useAxiosDefault = () => {
     }
   );
 
-  AxiosDefault.interceptors.response.use(
+  axiosInstance.interceptors.response.use(
     (response) => {
       return response;
     },
@@ -49,20 +50,20 @@ const useAxiosDefault = () => {
     }
   );
 
-  return { AxiosDefault };
+  return axiosInstance;
 };
 
 const AxiosDefault = async ({ method, url, data }) => {
   try {
-    const { AxiosDefault } = useAxiosDefault();
+    const axiosInstance = await createAxiosInstance();
 
-    return await AxiosDefault({
+    return await axiosInstance({
       method,
       url,
       data,
     });
   } catch (error) {
-    console.error("An error occurred in AxiosDefaultSetting:", error);
+    console.error("An error occurred in AxiosDefault:", error);
     throw error;
   }
 };

@@ -32,7 +32,6 @@ const App = () => {
     if (get(auth_credentials, "_id", "")) {
       dispatch(getCartData({ userId: get(auth_credentials, "_id", "") }));
       dispatch(getUserData({ userId: get(auth_credentials, "_id", "") }));
-      dispatch(getUserData({ userId: get(auth_credentials, "_id", "") }));
     }
   }, [auth_credentials, dispatch]);
 

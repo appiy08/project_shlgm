@@ -22,7 +22,7 @@ import {
   Spin,
   Typography,
 } from "antd";
-import { get, map, startCase } from "lodash";
+import { capitalize, get, map, startCase } from "lodash";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -36,7 +36,7 @@ const { Option } = Select;
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { auth_credentials } = useAuthContext();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [product, setProduct] = useState([]);
@@ -202,12 +202,11 @@ const ProductDetailPage = () => {
                     value={selectedSize}
                     style={{ width: 100 }}
                   >
-                    <Option value="xs">XS</Option>
-                    <Option value="s">S</Option>
-                    <Option value="m">M</Option>
-                    <Option value="l">L</Option>
-                    <Option value="xl">XL</Option>
-                    <Option value="xxl">XXL</Option>
+                    {map(get(product, "sizes", []), (size, index) => (
+                      <Option key={index} value={size}>
+                        {capitalize(size)}
+                      </Option>
+                    ))}
                   </Select>
                 </Space>
               </Flex>
